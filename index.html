@@ -1,7 +1,85 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en"  xml:lang="en">
 <head>
+  <title>Flyin' In</title>
+  <script>
+    function inputFocus(i) {
+        if(i.value==i.defaultValue){ i.value=""; i.style.color="#000"; }
+    }
+    function inputBlur(i) {
+    if(i.value==""){ i.value=i.defaultValue; i.style.color="#888"; }
+    }
+
+    function checkPhoneNum(inputTxt) {
+    var phoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    if(inputTxt.value.match(phoneNum)) {
+    return true;
+    }
+    else {
+    alert("Incorrect Phone Number")
+    document.getElementById('Phone').value='';
+    return false;
+    }
+    }
+
+    function checkFlightNum(inputTxt) {
+    var flightNum = /^[0-9]{1,4}$/;
+    if(inputTxt.value.match(flightNum)) {
+    return true;
+    }
+    else {
+    alert("Incorrect Flight Number")
+    document.getElementById('Flight').value='';
+    return false;
+    }
+    }
+
+    function checkZipCode(inputTxt) {
+    var zipCode = /^[0-9]{5}$/;
+    if(inputTxt.value.match(zipCode)) {
+    return true;
+    }
+    else {
+    alert("Incorrect Zip Code")
+    document.getElementById('ZipCode').value='';
+    return false;
+    }
+    }
+
+    </script>
 </head>
 <body>
+  <form action="">
+    <table border=1>
+      <tr>
+	<td>Logo</td>
+	<td>Flyin' In</td>
+	</tr>
+      <tr>
+	<td>Airline<br>
+	  <input type="text" name="Airline" value="Airline" style="color:#888;" placeholder="Airline" onfocus="inputFocus(this)" onblur="inputBlur(this)"></td>
+	<td rowspan=2 ><p>Airline Info</p></td>
+	</tr>
+      <tr>
+	<td>Flight #<br>
+	  <input type="text" id="Flight" name="Flight" value="Flight" style="color:#888;" placeholder="Flight #" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkFlightNum(this)"></td>
+	</tr>
+      <tr>
+	<td>Driver's Starting Location<br>
+	  <input type="text" id="ZipCode" name="ZipCode" value="Zip Code" style="color:#888;" placeholder="Zip Code" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkZipCode(this)"></td>
+	<td><p>Location Info</p></td>
+	</tr>
+      <tr>
+	<td colspan=2><p>RESULT</p></td>
+	</tr>
+      <tr>
+	<td colspan=2>Phone<br>
+	  <input type="text" id="Phone" name="Phone" value="Phone" style="color:#888;" placeholder="Phone" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkPhoneNum(this)"></td>
+	</tr>
+      <tr>
+	<td colspan=2><input type="submit" value="Submit"></td>
+	</tr>
+      </form>
+  </table>
 </body>
 </html>
