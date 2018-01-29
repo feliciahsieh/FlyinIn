@@ -4,6 +4,7 @@
 
 ## Welcome
 Flyin In is written in Javascript and uses API's from Twilio, FlightAware, and Google Maps.
+This App is UNDER CONSTRUCTION. Please be patient as I am actively developing it. Thanks.
 
 ## Table of Contents
 * [Requirements](#requirements)
