@@ -14,8 +14,8 @@ This App is UNDER CONSTRUCTION. Please be patient as I am actively developing it
 * [License](#license)
 
 ## Requirements
-* Ubuntu 14.04 LTS
-* NodeJS
+* Ubuntu (v14.04 LTS)
+* NodeJS (v6.12.3)
 * Twilio API (with valid Twilio account and token)
   -TWILIO NODE HELPER LIBRARY
 * FlightAware API
