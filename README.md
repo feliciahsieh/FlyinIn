@@ -70,6 +70,7 @@ Should you use Vagrant in your Linux environment, you can also install Docker to
 `sudo apt-get install -y docker.io`
 
 3. If you have an old Docker image, you may need to run these 2 commands to remove it.
+
 `sudo docker ps -a`
 `sudo docker rm [containerName]`
 
@@ -77,7 +78,9 @@ Should you use Vagrant in your Linux environment, you can also install Docker to
 
 `sudo docker run -d -it --name nginxtest -v "$(pwd)":/usr/share/nginx/html:ro -p 8080:80 nginx:latest`
 
-5. In your web browser, go to private network that was setup in the `Vagrantfile`, 192.168.33.10:8080
+5. In your web browser, go to private network that was setup in the `Vagrantfile`
+
+`192.168.33.10:8080`
 
 6. If you use multiple index.html files, create a soft link to point to the right index.html file.
 
