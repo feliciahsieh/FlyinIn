@@ -1,5 +1,3 @@
-#!/usr/bin/node
-
 function inputFocus(field) {
     if (field.value == field.defaultValue) {
         field.value = "";
@@ -20,7 +18,7 @@ function checkPhoneNum(inputTxt) {
         return true;
     }
     else {
-        alert("Incorrect Phone Number")
+        alert("Phone Numbers should match the format, nnn-nnn-nnnn")
         document.getElementById('Phone').value='';
         return false;
     }
@@ -32,7 +30,7 @@ function checkFlightNum(inputTxt) {
         return true;
     }
     else {
-        alert("Incorrect Flight Number")
+        alert("Flight Numbers should match the format, nnnn")
         document.getElementById('Flight').value = '';
         return false;
     }
@@ -44,7 +42,7 @@ function checkZipCode(inputTxt) {
         return true;
     }
     else {
-        alert("Incorrect Zip Code")
+        alert("Zip Code should match the value nnnnn")
         document.getElementById('ZipCode').value='';
         return false;
     }

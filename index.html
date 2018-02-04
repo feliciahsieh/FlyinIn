@@ -1,188 +1,84 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
   <head>
-    <title>Flyin In</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Flyin' In</title>
     <link rel="stylesheet" href="flyinin.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script>
-      function inputFocus(field) {
-        if (field.value == field.defaultValue) {
-          field.value = "";
-          field.style.color = "#000";
-        }
-      }
-
-      function inputBlur(field) {
-        if (field.value == "") {
-          field.value = field.defaultValue;
-          field.style.color = "#888";
-        }
-      }
-
-      function checkPhoneNum(inputTxt) {
-        var phoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-        if(inputTxt.value.match(phoneNum)) {
-          return true;
-        }
-        else {
-          alert("Incorrect Phone Number")
-          document.getElementById('Phone').value='';
-          return false;
-        }
-      }
-
-      function checkFlightNum(inputTxt) {
-        var flightNum = /^[0-9]{1,4}$/;
-        if(inputTxt.value.match(flightNum)) {
-          return true;
-        }
-        else {
-          alert("Incorrect Flight Number")
-          document.getElementById('Flight').value = '';
-          return false;
-        }
-      }
-
-      function checkZipCode(inputTxt) {
-        var zipCode = /^[0-9]{5}$/;
-        if(inputTxt.value.match(zipCode)) {
-          return true;
-        }
-        else {
-          alert("Incorrect Zip Code")
-          document.getElementById('ZipCode').value='';
-          return false;
-        }
-      }
-
-      //function getData() {
-      //  alert(getElementById("Airline").value + getElementById("Flight").value + getElementById("ZipCode").value + getElementById("Phone").value)
-      //}
-  </script>
-
+    <script src="flyinin.js"></script>
   </head>
   <body>
-    <div id="right-panel">
-      <div id="inputs">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"><img src="LogoFlyinIn.png" width="50px"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+      </button>
 
-        <form>
-          <table border=1 align="center">
-            <tr>
-              <td>Airline<br>
-              <input type="text" name="Airline" value="Airline" style="color:#888;" placeholder="Airline" onfocus="inputFocus(this)" onblur="inputBlur(this)"></td>
-              <td rowspan=2 ><p>Airline Info</p></td>
-            </tr>
-            <tr>
-              <td>Flight #<br>
-              <input type="text" id="Flight" name="Flight" value="Flight" style="color:#888;" placeholder="Flight #" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkFlightNum(this)"></td>
-            </tr>
-            <tr>
-              <td>Driver's Starting Location<br>
-              <input type="text" id="ZipCode" name="ZipCode" value="Zip Code" style="color:#888;" placeholder="Zip Code" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkZipCode(this)"></td>
-              <td><p>Location Info</p></td>
-            </tr>
-            <tr>
-              <td colspan=2><p>RESULT</p></td>
-            </tr>
-            <tr>
-              <td colspan=2>Phone<br>
-                <input type="text" id="Phone" name="Phone" value="Phone" style="color:#888;" placeholder="Phone" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkPhoneNum(this)"></td>
-            </tr>
-            <tr>
-              <td colspan=2><div style="text-align:center"><input type="submit" value="Submit"></div></td>
-            </tr>
-          </table>
-        </form>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	<ul class="navbar-nav mr-auto">
+	  <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+	  </li>
+	  <li class="nav-item">
+            <a class="nav-link" href="aboutus.html">About Us</a>
+	  </li>
+	</ul>
+      </div>
+    </nav>
 
-        <pre>
-          var origin1 = {lat: 37.7806074, lng: -122.4086274};
-          var destinationA = 'Oakland Airport';
-        </pre>
+    <div class="jumbotron text-center">
+      <div class="container">
+	<h1>Flyin' In</h1>
+	<p>Welcome to the best tool to find out when you should leave for the airport to pick up your loved ones</p>
+	<a href="aboutus.html" class="btn btn-primary">Read More</a>
       </div>
-      <div>
-        <strong>Results</strong>
-      </div>
-      <div id="output"></div>
     </div>
-    <div id="map"></div>
-    <script>
-      function initMap() {
-        var bounds = new google.maps.LatLngBounds;
-        var markersArray = [];
-        var origin1 = {lat: 37.7806074, lng: -122.4086274};
-        var destinationA = 'KOAK';
 
-        var destinationIcon = 'https://chart.googleapis.com/chart?' +
-            'chst=d_map_pin_letter&chld=D|FF0000|000000';
-        var originIcon = 'https://chart.googleapis.com/chart?' +
-            'chst=d_map_pin_letter&chld=O|FFFF00|000000';
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 37.7806074, lng: -122.4086274},
-          zoom: 10
-        });
-        var geocoder = new google.maps.Geocoder;
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6 pull-left">
+	<form>
+	  <div class="form-group">
+	    <label>Airline</label>
+	    <select class="form-control">
+	      <option value="SWA">Southwest Airlines</option>
+	      <option value="JBU">JetBlue Airlines</option>
+	      <option value="VX">Virgin America</option>
+	    </select>
+	  </div>
+	  <div class="form-group">
+	    <label>Flight Number</label>
+	    <input id="Flight" name="Flight" value-"nnnn" type="text" class="form-control" placeholder="Flight Number" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkFlightNum(this)">
+	  </div>
+	  <div class="form-group">
+	    <label>Driver Start Location</label>
+	    <input type="text" class="form-control" placeholder="Zip Code" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkZipCode(this)">
+	  </div>
+	  <div class="form-group text-center">
+	    <div class="btn btn-primary">
+	      Submit
+	    </div>
+	  </div>
+	  <div class="form-group">
+	    <label for="phone">Phone Number</label>
+	    <input type="tel" id="phone" name="phone" class="form-control" placeholder="xxx-xxx-xxxx" size="13" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkPhoneNum(this)">
+	  </div>
+	</form>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6 pull-right bg-primary">
+      </div>
+    </div>
 
-        var service = new google.maps.DistanceMatrixService;
-        service.getDistanceMatrix({
-          origins: [origin1],
-          destinations: [destinationA],
-          travelMode: 'DRIVING',
-          unitSystem: google.maps.UnitSystem.METRIC,
-          avoidHighways: false,
-          avoidTolls: false
-        }, function(response, status) {
-          if (status !== 'OK') {
-            alert('Error was: ' + status);
-          } else {
-            var originList = response.originAddresses;
-            var destinationList = response.destinationAddresses;
-            var outputDiv = document.getElementById('output');
-            outputDiv.innerHTML = '';
-            deleteMarkers(markersArray);
-
-            var showGeocodedAddressOnMap = function(asDestination) {
-              var icon = asDestination ? destinationIcon : originIcon;
-              return function(results, status) {
-                if (status === 'OK') {
-                  map.fitBounds(bounds.extend(results[0].geometry.location));
-                  markersArray.push(new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location,
-                    icon: icon
-                  }));
-                } else {
-                  alert('Geocode was not successful due to: ' + status);
-                }
-              };
-            };
-
-            for (var i = 0; i < originList.length; i++) {
-              var results = response.rows[i].elements;
-              geocoder.geocode({'address': originList[i]},
-                  showGeocodedAddressOnMap(false));
-              for (var j = 0; j < results.length; j++) {
-                geocoder.geocode({'address': destinationList[j]},
-                    showGeocodedAddressOnMap(true));
-                outputDiv.innerHTML += originList[i] + ' to ' + destinationList[j] +
-                    ': ' + results[j].distance.text + ' in ' +
-                    results[j].duration.text + '<br>';
-              }
-            }
-          }
-        });
-      }
-
-      function deleteMarkers(markersArray) {
-        for (var i = 0; i < markersArray.length; i++) {
-          markersArray[i].setMap(null);
-        }
-        markersArray = [];
-      }
-    </script>
-    <script
-    async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoRvW47xXGNrYz-LYR3TLHC-p18sPFIes&callback=initMap">
-    </script>
-    <!-- https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=94546&destinations=KOAK&key=AIzaSyBoRvW47xXGNrYz-LYR3TLHC-p18sPFIes-->
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>
