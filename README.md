@@ -1,9 +1,9 @@
-# Flyin In
+# Flyin' In
 
 <p align="center"><img src="LogoFlyinIn.png" width="150px" /></p>
 
 ## Welcome
-Flyin In is written in Javascript, JQuery, Bootstrap and uses API's from Twilio, FlightAware, and Google Maps.
+Flyin' In is written in Javascript, JQuery, Bootstrap and uses API's from Twilio, FlightAware, and Google Maps.
 This App is UNDER CONSTRUCTION. Please be patient as I am actively developing it and hope to have a working version by mid-February. Thanks.
 
 ## Table of Contents
@@ -57,7 +57,7 @@ Use a browser and open index.html. Enter the Airline, Flight Number, and your Ph
 Note, text messages will only be sent to phone numbers in your chosen country. To upgrade to international phone numbers, you may need to upgrade your Twilio account.
 
 ## Credits
-Flyin In is owned and maintained by Felicia Hsieh ([@feliciahsiehsw](https://twitter.com/feliciahsiehsw)).
+Flyin' In is owned and maintained by Felicia Hsieh ([@feliciahsiehsw](https://twitter.com/feliciahsiehsw)).
 
 ## License
-Flyin In is released under the MIT license. See [LICENSE](https://github.com/feliciahsieh/flyinin/blob/master/LICENSE) for details.
+Flyin' In is released under the MIT license. See [LICENSE](https://github.com/feliciahsieh/flyinin/blob/master/LICENSE) for details.
