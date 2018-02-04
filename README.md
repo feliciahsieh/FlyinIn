@@ -72,6 +72,7 @@ Should you use Vagrant in your Linux environment, you can also install Docker to
 3. If you have an old Docker image, you may need to run these 2 commands to remove it.
 
 `sudo docker ps -a`
+
 `sudo docker rm [containerName]`
 
 4. Start Docker image
