@@ -3,7 +3,7 @@
 <p align="center"><img src="LogoFlyinIn.png" width="150px" /></p>
 
 ## Welcome
-Flyin In is written in Javascript and uses API's from Twilio, FlightAware, and Google Maps.
+Flyin In is written in Javascript, JQuery, Bootstrap and uses API's from Twilio, FlightAware, and Google Maps.
 This App is UNDER CONSTRUCTION. Please be patient as I am actively developing it and hope to have a working version by mid-February. Thanks.
 
 ## Table of Contents
@@ -28,8 +28,12 @@ sudo npm install twilio
 npm install node-rest-client
 ```
 * Google Maps
-* HTML / CSS
-* Web browser
+* Javascript
+* JQuery (v3.2.1)
+* Ajax (v1.12.9)
+* HTML5 / CSS
+* Bootstrap (v4.0.0)
+* Web browser using HTML5
 * Semistandard (12.0.0) for Javascript styling
 
 ## Installation
