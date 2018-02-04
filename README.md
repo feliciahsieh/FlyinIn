@@ -19,6 +19,9 @@ This App is UNDER CONSTRUCTION. Please be patient as I am actively developing it
 * NodeJS (v6.12.3)
 * Twilio API (with valid Twilio account and token)
   -twilio (v3.11.1)
+* Google Maps API (with valid Google API account and token)
+* FlightAware API (with valide FlightAware account and token)
+
 ```
 sudo npm install twilio
 ```
