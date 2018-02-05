@@ -1,6 +1,6 @@
 # Flyin' In
 
-<p align="center"><img src="LogoFlyinIn.png" width="150px" /></p>
+<p align="center"><img src="images/LogoFlyinIn.png" width="150px" /></p>
 
 ## Welcome
 Flyin' In is written in Javascript, JQuery, Bootstrap and uses API's from Twilio, FlightAware, and Google Maps.
