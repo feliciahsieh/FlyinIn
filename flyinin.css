@@ -1,38 +1,92 @@
-#right-panel {
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
-  padding-left: 10px;
-}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-#right-panel select, #right-panel input {
-  font-size: 15px;
-}
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-#right-panel select {
-  width: 100%;
-}
+    <title>Flyin' In</title>
+    <link rel="stylesheet" href="flyinin.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="flyinin.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"><img src="LogoFlyinIn.png" width="50px"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+      </button>
 
-#right-panel i {
-  font-size: 12px;
-}
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<ul class="navbar-nav mr-auto">
+  <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+  </li>
+  <li class="nav-item">
+            <a class="nav-link" href="aboutus.html">About Us</a>
+  </li>
+</ul>
+      </div>
+    </nav>
 
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+    <div class="jumbotron text-center">
+      <div class="container">
+<h1>Flyin' In</h1>
+    <p>Welcome! We'll help you to know when to pick up your loved ones at the airport</p>
+<a href="aboutus.html" class="btn btn-primary">Read More</a>
+      </div>
+    </div>
 
-#map {
-  height: 100%;
-  width: 50%;
-}
+    <div class="row">
+      <div class="col-md-6 col-sm-6 col-xs-6 pull-left">
+<form>
+  <div class="form-group">
+    <label>Airline</label>
+    <select class="form-control">
+      <option value="SWA">Southwest Airlines</option>
+      <option value="JBU">JetBlue Airlines</option>
+      <option value="VX">Virgin America</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Flight Number</label>
+    <input id="Flight" name="Flight" value="Flight number" type="text" class="form-control" placeholder="Flight Number" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkFlightNum(this)">
+  </div>
+  <div class="form-group">
+    <label>Driver Start Location (Zip Code)</label>
+    <input id="ZipCode" name="ZipCode" value="" type="text" class="form-control" placeholder="Zip Code" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkZipCode(this)">
+  </div>
+  <div class="form-group text-center">
+    <div class="btn btn-primary">Submit</div>
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone Number</label>
+    <input id="Phone" name="Phone" value="" type="tel" class="form-control" placeholder="Phone Number" size="13" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkPhoneNum(this)">
+  </div>
+</form>
+      </div>
+      <div class="col-md-6 col-sm-6 col-xs-6 pull-right">
+        <iframe id="drivingMap" width="100%" height="100%" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <script>
+          var url1 = "https://www.google.com/maps/embed/v1/directions?origin=";
+          var url2 = "&destination="
+          var origin = "castro valley";
+          var destination = "oakland airport";
+          var key = "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
+          var totalURL = url1 + origin + url2 + destination + key;
+          document.getElementById("drivingMap").src = totalURL;
+        </script>
+      </div>
+    </div>
 
-#right-panel {
-  float: left;
-  width: 48%;
-  padding-left: 2%;
-}
-
-#output {
-  font-size: 11px;
-}
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
