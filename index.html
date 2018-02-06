@@ -6,21 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Open Graph for Facebook -->
-      <meta property="og:url"           content="https://www.facebook.com/flyin.in" />
-      <meta property="og:type"          content="website" />
-      <meta property="og:title"         content="Flyin' In" />
-      <meta property="og:description"   content="help you to know when to pick up your loved ones at the airport" />
-      <meta property="og:image"         content="images/LogoFlyinIn.jpg" />
+    <meta property="og:url"           content="https://www.facebook.com/flyin.in" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Flyin' In" />
+    <meta property="og:description"   content="help you to know when to pick up your loved ones at the airport" />
+    <meta property="og:image"         content="images/LogoFlyinIn.jpg" />
 
-      <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-      <title>Flyin' In</title>
-      <link rel="stylesheet" href="flyinin.css">
-      <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-      <link rel="icon" href="favicon.ico" type="image/x-icon">
-      <script src="flyinin.js"></script>
-      </head>
+    <title>Flyin' In</title>
+    <link rel="stylesheet" href="flyinin.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="flyinin.js"></script>
+  </head>
   <body>
     <!-- LOAD FACEBOOK SDK for JavaScript -->
     <div id="fb-root"></div>
@@ -32,34 +32,34 @@
       js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.12';
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-      </script>
-
+    </script>
+    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#"><img src="images/LogoFlyinIn.png" width="50" alt="Flyin' In logo"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	<span class="navbar-toggler-icon"></span>
-	</button>
-
+      </button>
+      
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	<ul class="navbar-nav mr-auto">
 	  <li class="nav-item active">
 	    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-	    </li>
+	  </li>
 	  <li class="nav-item">
 	    <a class="nav-link" href="aboutus.html">About Us</a>
-	    </li>
-	  </ul>
-	</div>
-      </nav>
-
+	  </li>
+	</ul>
+      </div>
+    </nav>
+    
     <div class="jumbotron text-center">
       <div class="container">
 	<h1>Flyin' In</h1>
 	<p>Welcome! We'll help you to know when to pick up your loved ones at the airport</p>
 	<a href="aboutus.html" class="btn btn-primary">Read More</a>
-	</div>
       </div>
-
+    </div>
+    
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-6 pull-left">
 	<form>
@@ -69,25 +69,25 @@
 	      <option value="SWA">Southwest Airlines</option>
 	      <option value="JBU">JetBlue Airlines</option>
 	      <option value="VX">Virgin America</option>
-	      </select>
-	    </div>
+	    </select>
+	  </div>
 	  <div class="form-group">
 	    <label>Flight Number</label>
 	    <input id="Flight" name="Flight" value="Flight number" type="text" class="form-control" placeholder="Flight Number" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkFlightNum(this)">
-	    </div>
+	  </div>
 	  <div class="form-group">
 	    <label>Driver Start Location (Zip Code)</label>
 	    <input id="ZipCode" name="ZipCode" value="" type="text" class="form-control" placeholder="Zip Code" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkZipCode(this)">
-	    </div>
+	  </div>
 	  <div class="form-group text-center">
 	    <div class="btn btn-primary">Submit</div>
-	    </div>
+	  </div>
 	  <div class="form-group">
 	    <label>Phone Number</label>
 	    <input id="Phone" name="Phone" value="" type="tel" class="form-control" placeholder="Phone Number" size="13" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkPhoneNum(this)">
-	    </div>
-	  </form>
-	</div>
+	  </div>
+	</form>
+      </div>
       <div class="col-md-6 col-sm-6 col-xs-6 pull-right">
 	<iframe id="drivingMap" width=100% height=100% style="border:0" allowfullscreen></iframe>
 	<script>
@@ -98,13 +98,13 @@
 	  var key = "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
 	  var totalURL = url1 + origin + url2 + destination + key;
 	  document.getElementById("drivingMap").src = totalURL;
-	  </script>
-	</div>
+	</script>
       </div>
+    </div>
     <footer class="page-footer">
       <div class="footer-copyright container-fluid" style="text-align:center">© Flyin' In 2018</div>
-      </footer>
-
+    </footer>
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -119,10 +119,10 @@
 	 data-size="small"
 	 data-show-faces="true"
 	 data-share="true">
-      </div>
+    </div>
     <div style="text-align:center">
       <a href="https://www.facebook.com/FlyinIn"><img src="images/LogoFacebook.png" width="36" alt="Facebook Flyin' In"></a>
       <a class="twitter-follow-button" href="https://twitter.com/FlyinInApp"><img src="images/LogoTwitter.png" width="50" alt="Twitter Flyin' In"></a>
-      </div>
-    </body>
+    </div>
+  </body>
 </html>
