@@ -12,6 +12,7 @@
     <meta property="og:description"   content="help you to know when to pick up your loved ones at the airport" />
     <meta property="og:image"         content="images/LogoFlyinIn.jpg" />
 
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -19,11 +20,10 @@
     <link rel="stylesheet" href="flyinin.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script src="flyinin.js"></script>
+    <script type="text/javascript" src="flyinin.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   </head>
   <body>
-    <!-- LOAD FACEBOOK SDK for JavaScript -->
-    <div id="fb-root"></div>
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id))
@@ -82,9 +82,17 @@
 	  <div class="form-group text-center">
 	    <div class="btn btn-primary">Submit</div>
 	  </div>
+	  <!-- ********RESULT OF QUERY BELOW ********-->
+	  <div class="form-group">
+	    <div class="container text-center bg-warning" id="result">RESULT</div>
+	  </div>
+	  <!-- ********RESULT OF QUERY ABOVE ********-->
 	  <div class="form-group">
 	    <label>Phone Number</label>
 	    <input id="Phone" name="Phone" value="" type="tel" class="form-control" placeholder="Phone Number" size="13" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkPhoneNum(this)">
+	  </div>
+	  <div class="form-group text-center">
+	    <div class="btn btn-primary">Click to Get Text Msg</div>
 	  </div>
 	</form>
       </div>
@@ -107,22 +115,13 @@
     
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <!-- FACEBOOK LIKE (NOT WORKING)-->
-    <div class="fb-like"
-	 data-href="https://www.facebook.com/flyin.in"
-	 data-width="20"
-	 data-layout="standard"
-	 data-action="like"
-	 data-size="small"
-	 data-show-faces="true"
-	 data-share="true">
-    </div>
     <div style="text-align:center">
       <a href="https://www.facebook.com/FlyinIn"><img src="images/LogoFacebook.png" width="36" alt="Facebook Flyin' In"></a>
       <a class="twitter-follow-button" href="https://twitter.com/FlyinInApp"><img src="images/LogoTwitter.png" width="50" alt="Twitter Flyin' In"></a>
     </div>
+    <script type="text/javascript" src="testData.js"></script>
   </body>
 </html>
