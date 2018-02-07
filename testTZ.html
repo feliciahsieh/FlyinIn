@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <!-- https://www.thesoftwareguy.in/detect-user-timezone-using-javascript/ -->
+    <script type="text/javascript" src="jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="jstz-1.0.4.min.js"></script>
+    <script type="text/javascript" src="moment.min.js"></script>
+    <script type="text/javascript" src="moment-timezone.js"></script>
+    <script type="text/javascript" src="moment-timezone-data.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+      $(document).ready(function() {
+      var tz = jstz.determine();
+      var timezone = tz.name();
+      alert(timezone);        
+      var current_time = moment().tz(timezone).format('MMMM Do YYYY, h:mm:ss a');
+      alert(current_time);
+      });
+    </script>
+  </body>
+</html>
