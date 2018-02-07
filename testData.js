@@ -8,11 +8,12 @@ let url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperi
 //RUN JQUERY
 $.get(url)
     .done(function (data) {
-	let durationText = data.rows[0].elements[0].duration.text;
-	let durationValue = data.rows[0].elements[0].duration.value; //in seconds
+	let driverDurationText = data.rows[0].elements[0].duration.text;
+	let driverDurationValue = data.rows[0].elements[0].duration.value; //in seconds
     });
 
-var flightArrive = ''; //in seconds
+
+var flightArrive = ''; //in Epoch seconds
 var timeCalc = '';
 
 var timeToLeave = '5:05 PM';
