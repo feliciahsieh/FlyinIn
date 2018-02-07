@@ -11,7 +11,6 @@ $.get(url)
 	let driverDurationText = data.rows[0].elements[0].duration.text;
 	let driverDurationValue = data.rows[0].elements[0].duration.value; //in seconds
 
-
 	var flightArrive = ''; //in Epoch seconds
 	var timeCalc = '';
 
@@ -20,6 +19,4 @@ $.get(url)
 	var resultText = 'Best time to Leave is <u><b>' + timeToLeave + ' +</b></u> (to arrive at ' + timeToArrive + ')';
 
 	$('#result').replaceWith(data.rows[0].elements[0].duration.text);
-
-
     });
