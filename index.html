@@ -61,23 +61,24 @@
       <div class="col-md-6 col-sm-6 col-xs-6 pull-left">
 	<form>
 	  <div class="form-group">
-	    <label>Airline</label>
-	    <select class="form-control">
+	    <label class="control-label" for="Airline">Airline</label>
+	    <select id="Airline" class="form-control">
 	      <option value="SWA">Southwest Airlines</option>
 	      <option value="JBU">JetBlue Airlines</option>
 	      <option value="VX">Virgin America</option>
 	    </select>
 	  </div>
 	  <div class="form-group">
-	    <label>Flight Number</label>
-	    <input id="Flight" name="Flight" value="Flight number" type="text" class="form-control" placeholder="Flight Number" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkFlightNum(this)">
+	    <label class="control-label" for="Flight">Flight Number</label>
+	    <input id="Flight" name="Flight" value="" type="number" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkFlightNum(this)">
 	  </div>
 	  <div class="form-group">
-	    <label>Driver Start Location (Zip Code)</label>
-	    <input id="ZipCode" name="ZipCode" value="" type="text" class="form-control" placeholder="Zip Code" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkZipCode(this)">
+	    <label class="control-label" for="ZipCode">Driver Start Location (Zip Code)</label>
+	    <input id="ZipCode" name="ZipCode" value="" type="number" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkZipCode(this)">
 	  </div>
 	  <div class="form-group text-center">
-	    <div class="btn btn-primary">Submit</div>
+	    <button id="Submit" class="btn btn-primary">Submit</button>
+	    <!--div class="btn btn-primary">Submit</div-->
 	  </div>
 	  <!-- ********RESULT OF QUERY BELOW ********-->
 	  <div class="form-group">
@@ -85,11 +86,11 @@
 	  </div>
 	  <!-- ********RESULT OF QUERY ABOVE ********-->
 	  <div class="form-group">
-	    <label>Phone Number</label>
+	    <label class="control-label" for="Phone">Phone Number</label>
 	    <input id="Phone" name="Phone" value="" type="tel" class="form-control" placeholder="Phone Number" size="13" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkPhoneNum(this)">
 	  </div>
 	  <div class="form-group text-center">
-	    <div class="btn btn-primary">Click to Get Text Msg</div>
+	    <button id="buttonTextMe" type="button" class="btn btn-primary">Text Me</button>
 	  </div>
 	</form>
       </div>
@@ -106,9 +107,6 @@
 	</script>
       </div>
     </div>
-    <footer class="page-footer">
-      <div class="footer-copyright container-fluid" style="text-align:center">© Flyin' In 2018</div>
-    </footer>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -118,5 +116,8 @@
       <a class="twitter-follow-button" href="https://twitter.com/FlyinInApp"><img src="images/LogoTwitter.png" width="50" alt="Twitter Flyin' In"></a>
     </div>
     <script type="text/javascript" src="testData.js"></script>
+    <footer class="page-footer">
+      <div class="footer-copyright container-fluid" style="text-align:center">© Flyin' In 2018</div>
+    </footer>
   </body>
 </html>
