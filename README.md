@@ -17,22 +17,15 @@ This App is UNDER CONSTRUCTION. Please be patient as I am actively developing it
 ## Requirements
 * Ubuntu (v14.04 LTS)
 * NodeJS (v6.12.3)
-* Twilio API (with valid Twilio account and token)
-  -twilio (v3.11.1)
-* Google Maps API (with valid Google API account and token)
-* FlightAware API (with valide FlightAware account and token)
-
-```
-sudo npm install twilio
-```
+* Twilio API (with valid Twilio account and token) (v3.11.1)
 * FlightAware API
   -FlightXML (v2.0)
   -Javascript module, node-rest-client (v3.1.0)
-```
-npm install node-rest-client
-```
-* Google Maps
-* Javascript
+* FlightAware API (with valide FlightAware account and token)
+* Google Maps API (with valid Google API account and token)
+* jsTimezoneDetect (Time Zone) and moment.js (Local Time) library files
+
+  -See https://www.thesoftwareguy.in/detect-user-timezone-using-javascript/
 * JQuery (v3.2.1)
 * Ajax (v1.12.9)
 * HTML5 / CSS
@@ -48,11 +41,15 @@ git clone https://github.com/feliciahsieh/flyinin.git
 ```
 
 ```
-$ npm init (and fill out to create your package.json)
+npm init (and fill out to create your package.json)
 ```
 
 ```
-$ npm install twilio
+npm install node-rest-client
+```
+
+```
+npm install twilio
 ```
 
 ## Usage
