@@ -53,7 +53,10 @@
       <div class="container">
 	<h1>Flyin' In</h1>
 	<p>Welcome! We'll help you to know when to pick up your loved ones at the airport</p>
-	<a href="aboutus.html" class="btn btn-primary">Read More</a>
+	<div style="text-align:center">
+	  <a href="https://www.facebook.com/FlyinIn"><img src="images/LogoFacebook.png" width="36" alt="Facebook Flyin' In"></a>
+	  <a class="twitter-follow-button" href="https://twitter.com/FlyinInApp"><img src="images/LogoTwitter.png" width="50" alt="Twitter Flyin' In"></a>
+	</div>
       </div>
     </div>
     
@@ -70,7 +73,7 @@
 	  </div>
 	  <div class="form-group">
 	    <label class="control-label" for="Flight">Flight Number</label>
-	    <input id="Flight" name="Flight" value="" type="number" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkFlightNum(this)">
+	    <input id="Flight" name="Flight" value="333" type="number" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkFlightNum(this)">
 	  </div>
 	  <div class="form-group">
 	    <label class="control-label" for="ZipCode">Driver Start Location (Zip Code)</label>
@@ -111,12 +114,8 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <div style="text-align:center">
-      <a href="https://www.facebook.com/FlyinIn"><img src="images/LogoFacebook.png" width="36" alt="Facebook Flyin' In"></a>
-      <a class="twitter-follow-button" href="https://twitter.com/FlyinInApp"><img src="images/LogoTwitter.png" width="50" alt="Twitter Flyin' In"></a>
-    </div>
     <script type="text/javascript" src="testData.js"></script>
-    <footer class="page-footer">
+    <footer class="page-footer bg-dark" style="color:white">
       <div class="footer-copyright container-fluid" style="text-align:center">© Flyin' In 2018</div>
     </footer>
   </body>

@@ -1,8 +1,13 @@
 //TEST DATA
 
+//BUILD QUERY FOR FLIGHTAWARE FOR SPECIFIC FLIGHT
+let airline = $('#Airline option:selected').text();
+let flightNumber = $('#Flight').val();
+
 //BUILD URL FOR GOOGLE MAPS DISTANCE MATRIX API
 let driverStart = '94546';
 let driverEnd = 'KOAK';
+
 let url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=' + driverStart + '&destinations=' + driverEnd + '&key=AIzaSyBoRvW47xXGNrYz-LYR3TLHC-p18sPFIes';
 
 //RUN JQUERY AJAX
