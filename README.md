@@ -25,8 +25,8 @@ This App is UNDER CONSTRUCTION. Please be patient as I am actively developing it
 * FlightAware API (with valide FlightAware account and token)
 * Google Maps API (with valid Google API account and token)
 * jsTimezoneDetect (Time Zone) and moment.js (Local Time) library files
+
   -See https://www.thesoftwareguy.in/detect-user-timezone-using-javascript/
-* Javascript
 * JQuery (v3.2.1)
 * Ajax (v1.12.9)
 * HTML5 / CSS
