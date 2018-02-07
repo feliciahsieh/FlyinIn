@@ -17,8 +17,7 @@ This App is UNDER CONSTRUCTION. Please be patient as I am actively developing it
 ## Requirements
 * Ubuntu (v14.04 LTS)
 * NodeJS (v6.12.3)
-* Twilio API (with valid Twilio account and token)
-  -twilio (v3.11.1)
+* Twilio API (with valid Twilio account and token) (v3.11.1)
 * FlightAware API
   -FlightXML (v2.0)
   -Javascript module, node-rest-client (v3.1.0)
@@ -42,7 +41,7 @@ git clone https://github.com/feliciahsieh/flyinin.git
 ```
 
 ```
-$ npm init (and fill out to create your package.json)
+npm init (and fill out to create your package.json)
 ```
 
 ```
@@ -50,7 +49,7 @@ npm install node-rest-client
 ```
 
 ```
-$ npm install twilio
+npm install twilio
 ```
 
 ## Usage
