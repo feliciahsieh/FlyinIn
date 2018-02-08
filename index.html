@@ -54,15 +54,15 @@
 	<h1>Flyin' In</h1>
 	<p>Welcome! We'll help you to know when to pick up your loved ones at the airport</p>
 	<div style="text-align:center">
-	  <a href="https://www.facebook.com/FlyinIn"><img src="images/LogoFacebook.png" width="36" alt="Facebook Flyin' In"></a>
-	  <a class="twitter-follow-button" href="https://twitter.com/FlyinInApp"><img src="images/LogoTwitter.png" width="50" alt="Twitter Flyin' In"></a>
+	  <a href="https://www.facebook.com/FlyinIn"><img src="images/LogoFacebook.png" height="40" alt="Facebook Flyin' In"></a>
+	  <a class="twitter-follow-button" href="https://twitter.com/FlyinInApp"><img src="images/LogoTwitter.png" height="40" alt="Twitter Flyin' In"></a>
 	</div>
       </div>
     </div>
     
     <div class="row">
       <div class="col-md-6 col-sm-6 col-xs-6 pull-left">
-	<form>
+	<form onsubmit="calcDriveTime()">
 	  <div class="form-group">
 	    <label class="control-label" for="Airline">Airline</label>
 	    <input id="Airline" name="Airline" value="" type="text" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkAirline(this)">
@@ -84,6 +84,8 @@
 	    <div class="container text-center bg-warning" id="result">RESULT</div>
 	  </div>
 	  <!-- ********RESULT OF QUERY ABOVE ********-->
+
+	<form onsubmit="sendTextMsg()">
 	  <div class="form-group">
 	    <label class="control-label" for="Phone">Phone Number</label>
 	    <input id="Phone" name="Phone" value="" type="tel" class="form-control" placeholder="Phone Number" size="13" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkPhoneNum(this)">
@@ -93,9 +95,10 @@
 	  </div>
 	</form>
       </div>
-      <div class="col-md-6 col-sm-6 col-xs-6 pull-right">
-	<iframe id="drivingMap" width=100% height=100% style="border:0" allowfullscreen></iframe>
+      <div id="map" class="col-md-6 col-sm-6 col-xs-6 pull-right">
+	<iframe id="drivingMap" class="bg-primary" width="100%" height="100%" style="border:0" allowfullscreen></iframe>
 	<script>
+	  function xx() {
 	  var url1 = "https://www.google.com/maps/embed/v1/directions?origin=";
 	  var url2 = "&destination="
 	  var origin = "castro valley";
@@ -103,6 +106,7 @@
 	  var key = "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
 	  var totalURL = url1 + origin + url2 + destination + key;
 	  document.getElementById("drivingMap").src = totalURL;
+	  }
 	</script>
       </div>
     </div>
