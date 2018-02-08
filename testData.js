@@ -1,7 +1,7 @@
 //TEST DATA
 
 //BUILD QUERY FOR FLIGHTAWARE FOR SPECIFIC FLIGHT
-let airline = $('#Airline option:selected').text();
+let airline = $('#Airline').val();
 let flightNumber = $('#Flight').val();
 
 //BUILD URL FOR GOOGLE MAPS DISTANCE MATRIX API
