@@ -65,11 +65,7 @@
 	<form>
 	  <div class="form-group">
 	    <label class="control-label" for="Airline">Airline</label>
-	    <select id="Airline" class="form-control">
-	      <option value="SWA">Southwest Airlines</option>
-	      <option value="JBU">JetBlue Airlines</option>
-	      <option value="VX">Virgin America</option>
-	    </select>
+	    <input id="Airline" name="Airline" value="" type="text" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkAirline(this)">
 	  </div>
 	  <div class="form-group">
 	    <label class="control-label" for="Flight">Flight Number</label>

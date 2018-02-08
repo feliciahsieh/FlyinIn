@@ -12,6 +12,10 @@ function inputBlur (field) {
   }
 }
 
+function checkAirline (inputTxt) {
+    //stub function for check
+}
+
 function checkPhoneNum (inputTxt) {
   var phoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
   if (inputTxt.value.match(phoneNum)) {
@@ -44,7 +48,3 @@ function checkZipCode (inputTxt) {
     return false;
   }
 }
-
-// function getData() {
-//  alert(getElementById("Airline").value + getElementById("Flight").value + getElementById("ZipCode").value + getElementById("Phone").value)
-// }
