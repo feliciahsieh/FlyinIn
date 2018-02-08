@@ -76,7 +76,7 @@
     </div>
     
     <div class="row">
-      <div class="col-md-6 col-sm-6 col-xs-6 pull-left">
+      <div class="span6 col-md-6 col-sm-6 col-xs-6">
 	<form onsubmit="calcDriveTime()">
 	  <div class="form-group">
 	    <label class="control-label" for="Airline">Airline</label>
@@ -110,18 +110,16 @@
 	  </div>
 	</form>
       </div>
-      <div id="map" class="col-md-6 col-sm-6 col-xs-6 pull-right">
-	<iframe id="drivingMap" class="bg-primary" width="100%" height="100%" style="border:0" allowfullscreen></iframe>
+      <div id="mapMain" class="span6 col-md-6 col-sm-6 col-xs-6">
+	<iframe id="drivingMap" width="100%" height="100%" style="border:0" allowfullscreen></iframe>
 	<script>
-	  function xx() {
-	  var url1 = "https://www.google.com/maps/embed/v1/directions?origin=";
-	  var url2 = "&destination="
-	  var origin = "castro valley";
-	  var destination = "oakland airport";
-	  var key = "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
-	  var totalURL = url1 + origin + url2 + destination + key;
+	  let url1 = "https://www.google.com/maps/embed/v1/directions?origin=";
+	  let url2 = "&destination="
+	  let origin = "castro valley";
+	  let destination = "oakland airport";
+	  let key = "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
+	  let totalURL = url1 + origin + url2 + destination + key;
 	  document.getElementById("drivingMap").src = totalURL;
-	  }
 	</script>
       </div>
     </div>
