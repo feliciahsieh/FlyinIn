@@ -42,7 +42,7 @@ iframe {
 }
 
 .jumbotron {
-  background-image: url(images/AirplaneLanding.jpg);
+  background-image: url('AirplaneLanding.jpg');
   background-position: 15% 60%;
   background-size: cover;
   background-repeat: no-repeat;
