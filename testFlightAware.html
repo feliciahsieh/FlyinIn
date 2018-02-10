@@ -16,7 +16,7 @@
   <script type="text/javascript">
     var username = 'felicia214';
     var apiKey = 'f42d660a98bed5926ec167fafdacf4666931b1af';
-    var baseFxmlUrl = 'https://' + username + ':' + apiKey +'@flightxml.flightaware.com/json/FlightXML3/';
+    var baseFxmlUrl = 'https://flightxml.flightaware.com/' + username + ':' + apiKey +'@flightxml.flightaware.com/json/FlightXML3/';
     $(document).ready(function() {
     $('#go_button').click(function() {
     var requestOptions = {
@@ -24,6 +24,7 @@
     'howMany': 10,
     'offset': 0
     }
+console.log('url: ' + baseFxmlUrl + 'FlightInfoStatus');
     $.ajax({
     url: baseFxmlUrl + 'FlightInfoStatus',
     data: requestOptions,
@@ -31,10 +32,12 @@
     jsonp: 'jsonp_callback',
     dataType: 'jsonp',
     success: function(data, txtStatus, xhr) {
+console.log('data1:' + data);
     if (data.error) {
     alert('Failed to fetch flight: ' + data.error);
     return;
     }
+console.log('data2: ' + data);
     data.FlightInfoStatusResult.flights.forEach(flight => {
     // Check for flight that has actually departed
     if (flight.actual_departure_time.epoch > 0) {
@@ -43,6 +46,8 @@
     ' (' + flight.origin.code +')' + ' to ' + flight.destination.airport_name + ' (' + flight.destination.code +')' + 
     ' on ' + flight.actual_departure_time.date);
     // Display the route
+console.log('results: ' + results);
+console.log(flight.faFlightID);
     fetchAndRenderRoute(flight.faFlightID);
     return;
     }
