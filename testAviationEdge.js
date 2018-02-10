@@ -10,6 +10,7 @@ var departureIata ='JFK';
 
 //Hard coded for now (Airport Timetable)
 var airportIata = 'SFO';
+//Not needed but airportIcao = 'KSFO';
 
 //TEST QUERY (Flights)
 //https://aviation-edge.com/api/public/flights?&key=ce8aa4-7c63af-d48024-815717-bfad64' + '&flight[iataNumber]=B6615
@@ -22,8 +23,8 @@ $.get(urlFlights, function (dataFlights) {
     $('#departureIcaoCode').text(dataFlights[0].departure.icaoCode);
     $('#airlineIcaoCode').text(dataFlights[0].airline.icaoCode);
     $('#airlineIataCode').text(dataFlights[0].airline.iataCode);
-    window.departureIata = dataFlights[0].departure.iataCode;
-    window.departureIcao = dataFlights[0].departure.icaoCode;
+    departureIata = dataFlights[0].departure.iataCode;
+    departureIcao = dataFlights[0].departure.icaoCode;
     airlineIata = dataFlights[0].airline.iataCode;
     airlineIcao = dataFlights[0].airline.icaoCode;
 }, 'json');
