@@ -3,7 +3,7 @@
 <p align="center"><img src="images/LogoFlyinIn.png" width="150px" /></p>
 
 ## Welcome
-Flyin' In is written in Javascript, JQuery, Bootstrap and uses API's from Twilio, FlightAware, and Google Maps.
+Flyin' In is written in Javascript, JQuery/AJAX, Bootstrap and uses API's from Twilio, FlightAware, Aviation Edge, and Google Maps.
 This App is UNDER CONSTRUCTION. Please be patient as I am actively developing it and hope to have a working version by mid-February. Thanks.
 
 ## Table of Contents
@@ -17,15 +17,18 @@ This App is UNDER CONSTRUCTION. Please be patient as I am actively developing it
 ## Requirements
 * Ubuntu (v14.04 LTS)
 * NodeJS (v6.12.3)
+* Node Rest Client
 * Twilio API (with valid Twilio account and token) (v3.11.1)
 * FlightAware API
   -FlightXML (v2.0)
   -Javascript module, node-rest-client (v3.1.0)
-* FlightAware API (with valide FlightAware account and token)
+* FlightAware API (with valid FlightAware account and token for Beta FlightXML3)
+* Aviation Edge API (with valid API account and key for Premium level)
 * Google Maps API (with valid Google API account and token)
 * jsTimezoneDetect (Time Zone) and moment.js (Local Time) library files
 
   -See https://www.thesoftwareguy.in/detect-user-timezone-using-javascript/
+* NPM
 * JQuery (v3.2.1)
 * Ajax (v1.12.9)
 * HTML5 / CSS
@@ -34,7 +37,9 @@ This App is UNDER CONSTRUCTION. Please be patient as I am actively developing it
 * Semistandard (12.0.0) for Javascript styling
 
 ## Installation
-Set your computer ENVIRONMENT variables, TWILIO_SID and TWILIO_TOKEN to your values. Don't forget to export them.
+Set your computer ENVIRONMENT variables,
+TWILIO_SID, TWILIO_TOKEN, FLIGHTAWARE_USER, FLIGHTAWARE_API3, GMAPSDIST  to your values and export them.
+
 In your terminal, git clone the directory with the following command:
 ```
 git clone https://github.com/feliciahsieh/flyinin.git
