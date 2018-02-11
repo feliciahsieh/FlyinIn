@@ -12,6 +12,7 @@ function inputBlur (field) {
   }
 }
 
+//GLOBAL VARS
 var formData = {
 };
 //$.formData = formData;
@@ -25,9 +26,12 @@ var arrivalIata = ''; //from AviationEdge
 var arrivalIcao = ''; //from AviationEdge
 var flightStatus = ''; //from AviationEdge
 var zipCode = '';
-
+//Derived global vars
+var resultTime;
+var resultMessage;
 
 function processInput() {
+    $("#Airline").val($("#Airline").val().toUpperCase());
     //Get Airline input field
     switch ($("#Airline").val()) {
     case 'JBU':
@@ -46,6 +50,15 @@ function processInput() {
 	airlineIata = $("#Airline").val();
 	airlineIcao = 'LUV';
 	break;
+    case 'ASA':
+	airlineIcao = $("#Airline").val();
+	airlineIata = 'AS';
+	break;
+    case 'WN':
+	airlineIata = $("#Airline").val();
+	airlineIcao = 'ASA';
+	break;
+
     default:
 	airlineIata = 'FI ERROR';
 	airlineIcao = 'FI ERROR';
