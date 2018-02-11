@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Calculate when a driver should leave to pick up a passenger from the airport">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Flyin' In</title>
+    <link rel="stylesheet" href="css/flyinin.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script type="text/javascript" src="flyinin.js"></script>
+    <script
+       src="http://code.jquery.com/jquery-3.3.1.min.js"
+       integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+       crossorigin="anonymous">
+    </script>
+<!-- AUTOCOMPLETE for AIRLINE field -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $( function() {
+      let availableTags = [
+         "JBU",
+         "LUV",
+         "VRD"
+      ];
+      $( "#Airline" ).autocomplete({
+         source: availableTags
+      });
+      } );
+    </script>
+  </head>
+  <body>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id))
+      return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.12';
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#"><img src="images/LogoFlyinIn.png" width="50" alt="Flyin' In logo"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	<span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	<ul class="navbar-nav mr-auto">
+	  <li class="nav-item active">
+	    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link" href="aboutus.html">About Us</a>
+	  </li>
+	</ul>
+      </div>
+    </nav>
+    
+    <div class="jumbotron text-center">
+      <div class="container">
+	<h1>Flyin' In</h1>
+	<p>Welcome! We'll help you to know when to pick up your loved ones at the airport</p>
+	<div style="text-align:center">
+	  <a href="https://www.facebook.com/FlyinIn"><img src="images/LogoFacebook.png" height="40" alt="Facebook Flyin' In"></a>
+	  <a class="twitter-follow-button" href="https://twitter.com/FlyinInApp"><img src="images/LogoTwitter.png" height="40" alt="Twitter Flyin' In"></a>
+	</div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      function hello() {
+      alert("hello");
+      }
+    </script>
+ 
+    <div class="row">
+      <div class="span6 col-md-6 col-sm-6 col-xs-6">
+	<form>
+	  <div class="form-group">
+	    <label class="control-label" for="Airline">Airline</label>
+	    <input id="Airline" name="Airline" value="" type="text" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkAirline(this)">
+	  </div>
+	  <div class="form-group">
+	    <label class="control-label" for="Flight">Flight Number</label>
+	    <input id="FlightNum" name="FlightNum" value="333" type="number" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkFlightNum(this)">
+	  </div>
+	  <div class="form-group">
+	    <label class="control-label" for="ZipCode">Driver Start Location (Zip Code)</label>
+	    <input id="ZipCode" name="ZipCode" value="" type="number" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkZipCode(this)">
+	  </div>
+	  <div class="form-group text-center">
+	    <!--button id="Submit" class="btn btn-primary">Submit</button-->
+	    <div class="btn btn-primary" onclick="processInput()">Submit</div>
+	  </div>
+	  <!-- ********RESULT OF QUERY BELOW ********-->
+	  <div class="form-group">
+	    <div class="container text-center bg-warning" id="result">RESULT</div>
+	  </div>
+	  <!-- ********RESULT OF QUERY ABOVE ********-->
+	</form>
+	<form onsubmit="sendTextMsg()">
+	  <div class="form-group">
+	    <label class="control-label" for="Phone">Phone Number</label>
+	    <input id="Phone" name="Phone" value="" type="tel" class="form-control" placeholder="Phone Number" size="13" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkPhoneNum(this)">
+	  </div>
+	  <div class="form-group text-center">
+	    <button id="buttonTextMe" type="button" class="btn btn-primary">Text Me</button>
+	  </div>
+	</form>
+      </div>
+      <div id="mapMain" class="span6 col-md-6 col-sm-6 col-xs-6">
+	<iframe id="drivingMap" width="100%" height="100%" style="border:0" allowfullscreen></iframe>
+	<script>
+	  let url1 = "https://www.google.com/maps/embed/v1/directions?origin=";
+	  let url2 = "&destination="
+	  let origin = "castro valley";
+	  let destination = "oakland airport";
+	  let key = "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
+	  let totalURL = url1 + origin + url2 + destination + key;
+	  document.getElementById("drivingMap").src = totalURL;
+	</script>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="testData.js"></script>
+    <footer class="page-footer bg-dark" style="color:white">
+      <div class="footer-copyright container-fluid" style="text-align:center">© Flyin' In 2018</div>
+    </footer>
+  </body>
+</html>
