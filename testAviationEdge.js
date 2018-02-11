@@ -1,15 +1,15 @@
 //Global variables
 //Hard coded for now (Flights)
-var airlineIata = 'B6';
-var airlineIcao = 'JBU';
-var flightNumber = 615;
+var airlineIata = 'B6'; //'WN'; //'B6';
+var airlineIcao = 'JBU'; //'SWA'; //'JBU';
+var flightNumber = 615; //4110; //615;
 
 //Hard coded for now (Routes)
-var departureIcao ='KJFK';
-var departureIata ='JFK';
+var departureIcao = 'KJFK'; //'KHOU'; //'KJFK';
+var departureIata = 'JFK'; //'HOU'; //'JFK';
 
-//Hard coded for now (Airport Timetable)
-var airportIata = 'SFO';
+//Hard coded for now (Airport Timetable) arrivalIata, arrivalIcao
+var airportIata = 'SFO'; //'HOU'; //'SFO';
 //Not needed but airportIcao = 'KSFO';
 
 //TEST QUERY (Flights)
@@ -35,7 +35,7 @@ $.get(urlFlights, function (dataFlights) {
 let urlRoutes = 'http://aviation-edge.com/api/public/routes?key=ce8aa4-7c63af-d48024-815717-bfad64' + '&departureIata=' + departureIata + '&departureIcao=' + departureIcao + '&airlineIata=' + airlineIata + '&airlineIcao=' + airlineIcao + '&flightNumber=' + flightNumber;
 
 $.get(urlRoutes, function (dataRoutes) {
-    //console.log(dataRoutes);
+    console.log(dataRoutes);
     $('#arrivalTime').text(dataRoutes[0].arrivalTime);
     $('#airlineIcao').text(dataRoutes[0].airlineicao);
     $('#flightNumber').text(dataRoutes[0].flightNumber);
