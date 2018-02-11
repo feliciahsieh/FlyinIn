@@ -6,8 +6,8 @@ var flight = 2243; //4110; //615;
 
 //TEST QUERY (FlightInfoStatus)
 //https://flightxml.flightaware.com/json/FlightXML3/FlightInfoStatus?ident=JBU615&howMany=3&include_ex_data=false
-let username = 'felicia214';
-let key= ' f42d660a98bed5926ec167fafdacf4666931b1af';
+let username = process.env.FLIGHTAWARE_USER;
+let key= process.env.FLIGHTAWARE_API3;
 let urlFlightInfoStatus = 'http://flightxml.flightaware.com/json/FlightXML3/FlightInfoStatus?ident=' + airlineIcao + flight + '&howMany=3&include_ex_data=false';
 let urlFA = 'flightxml.flightaware.com/json/FlightXML3/FlightInfoStatus?ident=' + airlineIcao + flight + '&howMany=3&include_ex_data=false';
 //alert(urlFlightInfoStatus);
