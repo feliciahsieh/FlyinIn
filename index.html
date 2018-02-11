@@ -25,9 +25,9 @@
     <script>
       $( function() {
       let availableTags = [
-         "JetBlue",
-         "Southwest Airlines",
-         "Virgin America"
+         "JBU",
+         "LUV",
+         "VRD"
       ];
       $( "#Airline" ).autocomplete({
          source: availableTags
@@ -74,32 +74,38 @@
 	</div>
       </div>
     </div>
-    
+
+    <script type="text/javascript">
+      function hello() {
+      alert("hello");
+      }
+    </script>
+ 
     <div class="row">
       <div class="span6 col-md-6 col-sm-6 col-xs-6">
-	<form onsubmit="calcDriveTime()">
+	<form>
 	  <div class="form-group">
 	    <label class="control-label" for="Airline">Airline</label>
 	    <input id="Airline" name="Airline" value="" type="text" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkAirline(this)">
 	  </div>
 	  <div class="form-group">
 	    <label class="control-label" for="Flight">Flight Number</label>
-	    <input id="Flight" name="Flight" value="333" type="number" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkFlightNum(this)">
+	    <input id="FlightNum" name="FlightNum" value="333" type="number" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkFlightNum(this)">
 	  </div>
 	  <div class="form-group">
 	    <label class="control-label" for="ZipCode">Driver Start Location (Zip Code)</label>
 	    <input id="ZipCode" name="ZipCode" value="" type="number" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkZipCode(this)">
 	  </div>
 	  <div class="form-group text-center">
-	    <button id="Submit" class="btn btn-primary">Submit</button>
-	    <!--div class="btn btn-primary">Submit</div-->
+	    <!--button id="Submit" class="btn btn-primary">Submit</button-->
+	    <div class="btn btn-primary" onclick="processInput()">Submit</div>
 	  </div>
 	  <!-- ********RESULT OF QUERY BELOW ********-->
 	  <div class="form-group">
 	    <div class="container text-center bg-warning" id="result">RESULT</div>
 	  </div>
 	  <!-- ********RESULT OF QUERY ABOVE ********-->
-
+	</form>
 	<form onsubmit="sendTextMsg()">
 	  <div class="form-group">
 	    <label class="control-label" for="Phone">Phone Number</label>

@@ -12,6 +12,65 @@ function inputBlur (field) {
   }
 }
 
+var formData = {
+};
+//$.formData = formData;
+
+var airlineIata = ''; //from user. Fix later
+var airlineIcao = ''; //from user. Fix later
+var flight; //from user
+var departureIcao =''; //from AviationEdge
+var departureIata =''; //from AviationEdge
+var arrivalIata = ''; //from AviationEdge
+var arrivalIcao = ''; //from AviationEdge
+var flightStatus = ''; //from AviationEdge
+var zipCode = '';
+
+
+function processInput() {
+    //Get Airline input field
+    switch ($("#Airline").val()) {
+    case 'JBU':
+	airlineIcao = $("#Airline").val();
+	airlineIata = 'B6';
+	break;
+    case 'B6':
+	airlineIata = $("#Airline").val();
+	airlineIcao = 'JBU';
+	break;
+    case 'LUV':
+	airlineIcao = $("#Airline").val();
+	airlineIata = 'WN';
+	break;
+    case 'WN':
+	airlineIata = $("#Airline").val();
+	airlineIcao = 'LUV';
+	break;
+    default:
+	airlineIata = 'FI ERROR';
+	airlineIcao = 'FI ERROR';
+    }
+
+    //Get Flight Number input field
+    flight = $("#FlightNum").val();
+    //Lookup Flight Info from AviationEdge
+    //alert("airlineIata:" + airlineIata + " flight:" + flight);
+    zipCode = $("#ZipCode").val();
+    let urlFlights = 'https://aviation-edge.com/api/public/flights?&key=ce8aa4-7c63af-d48024-815717-bfad64' + '&flight[iataNumber]=' + airlineIata + flight;
+
+    $.get(urlFlights, function (dataFlights) {
+	console.log(dataFlights);
+	departureIata = dataFlights[0].departure.iataCode;
+	departureIcao = dataFlights[0].departure.icaoCode;
+	arrivalIata = dataFlights[0].arrival.iataCode;
+	arrivalIcao = dataFlights[0].arrival.icaoCode;
+	airlineIata = dataFlights[0].airline.iataCode;
+	flightStatus = dataFlights[0].status;
+	alert("INSIDE!\ndepartureIata: " + departureIata + "\ndepartureIcao: " + departureIcao + "\narrivalIata: " + arrivalIata + "\narrivalIcao: " + arrivalIcao + "\nairlineIata: " + airlineIata + "\nstatus: " + flightStatus);
+    }, 'json');
+
+}
+
 function checkAirline (inputTxt) {
     //stub function for check
 }
