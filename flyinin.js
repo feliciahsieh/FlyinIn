@@ -20,13 +20,14 @@ var formData = {
 var airlineIata = ''; //from user. Fix later
 var airlineIcao = ''; //from user. Fix later
 var flight; //from user
-var departureIcao =''; //from AviationEdge
-var departureIata =''; //from AviationEdge
-var arrivalIata = ''; //from AviationEdge
-var arrivalIcao = ''; //from AviationEdge
-var flightStatus = ''; //from AviationEdge
+var departureIcao =''; //from AviationEdge QUERY 1
+var departureIata =''; //from AviationEdge QUERY 1
+var arrivalIata = ''; //from AviationEdge QUERY 1
+var arrivalIcao = ''; //from AviationEdge QUERY 1
+var flightStatus = ''; //from AviationEdge QUERY 1
+var arrivalTime; //from AviationEdge QUERY 2
 var zipCode = '';
-//Derived global vars
+//DERIVED GLOBAL VARS
 var resultTime;
 var resultMessage;
 
@@ -42,7 +43,7 @@ function processInput() {
 	airlineIata = $("#Airline").val();
 	airlineIcao = 'JBU';
 	break;
-    case 'LUV':
+    case 'SWA':
 	airlineIcao = $("#Airline").val();
 	airlineIata = 'WN';
 	break;
@@ -72,7 +73,7 @@ function processInput() {
     let urlFlights = 'https://aviation-edge.com/api/public/flights?&key=ce8aa4-7c63af-d48024-815717-bfad64' + '&flight[iataNumber]=' + airlineIata + flight;
 
     $.get(urlFlights, function (dataFlights) {
-	console.log(dataFlights);
+	//console.log(dataFlights);
 	departureIata = dataFlights[0].departure.iataCode;
 	departureIcao = dataFlights[0].departure.icaoCode;
 	arrivalIata = dataFlights[0].arrival.iataCode;
@@ -80,6 +81,19 @@ function processInput() {
 	airlineIata = dataFlights[0].airline.iataCode;
 	flightStatus = dataFlights[0].status;
 	alert("INSIDE!\ndepartureIata: " + departureIata + "\ndepartureIcao: " + departureIcao + "\narrivalIata: " + arrivalIata + "\narrivalIcao: " + arrivalIcao + "\nairlineIata: " + airlineIata + "\nstatus: " + flightStatus);
+
+	//Query Aviation Edge Routes
+	$.get(urlFlights, function(dataRoutes) {
+	    let urlRoutes = 'http://aviation-edge.com/api/public/routes?key=ce8aa4-7c63af-d48024-815717-bfad64' + '&departureIata=' + departureIata + '&departureIcao=' + departureIcao + '&airlineIata=' + airlineIata + '&airlineIcao=' + airlineIcao + '&flightNumber=' + flight;
+	    alert(urlRoutes);
+	    $.get(urlRoutes, function (dataRoutes) {
+		console.log(dataRoutes);
+		arrivalTime = dataRoutes[0].arrivalTime;
+		alert('arrivalTime: ' + arrivalTime);
+	    }, 'json');
+
+	}, 'json');
+
     }, 'json');
 
 }
