@@ -7,12 +7,12 @@ var airportDepartureIata = 'SAN';
 var airportDepartureIcao = 'KSAN';
 //GLOBAL VARS
 var flightDate;
-var messageTime;
+var messageLocaltime;
 var messageTZ;
 var messageFlightDelay;
+var localtime;
 var uniqueFlightIata = airlineIata + flight;
 var uniqueFlightIcao = airlineIcao + flight;
-
 var i;
 
 //FIND TODAY'S SINGLE FLIGHT
@@ -57,6 +57,7 @@ client.methods.getFlightInfoStatus(getFlightInfoStatusArgs, function (data, resp
 	console.log(data.FlightInfoStatusResult.flights[i].origin.code + ' ' + 
 		    data.FlightInfoStatusResult.flights[i].estimated_arrival_time.date + ' ' + 
 		    data.FlightInfoStatusResult.flights[i].estimated_arrival_time.time + ' ' + 
+		    data.FlightInfoStatusResult.flights[i].estimated_arrival_time.localtime + ' ' + 
 		    data.FlightInfoStatusResult.flights[i].estimated_arrival_time.tz + ' ' +
 		    data.FlightInfoStatusResult.flights[i].departure_delay/60 + ' min delay');
 
@@ -64,6 +65,7 @@ client.methods.getFlightInfoStatus(getFlightInfoStatusArgs, function (data, resp
 	   (data.FlightInfoStatusResult.flights[i].origin.code === airportDepartureIcao) ) {
 	    console.log("FOUND IT");
 	    messageTime = data.FlightInfoStatusResult.flights[i].estimated_arrival_time.time; 
+	    messageLocaltime = data.FlightInfoStatusResult.flights[i].estimated_arrival_time.localtime; //Epoch local 
 	    messageTZ = data.FlightInfoStatusResult.flights[i].estimated_arrival_time.tz;
 	    messageFlightDelay = data.FlightInfoStatusResult.flights[i].departure_delay / 60; //in min
 

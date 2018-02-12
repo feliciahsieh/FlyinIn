@@ -127,7 +127,13 @@ function processInput() {
 	airlineIata = $("#FIAirline").val();
 	airlineIcao = 'ASA';
 	break;
-
+    case 'SKW':
+	airlineIcao = $("#FIAirline").val();
+	airlineIata = 'OO';
+    case 'OO':
+	airlineIata = $("#FIAirline").val();
+	airlineIcao = 'SKW';
+	break;
     default:
 	airlineIata = 'FI ERROR';
 	airlineIcao = 'FI ERROR';
@@ -153,31 +159,64 @@ function processInput() {
 	alert("INSIDE!\ndepartureIata: " + departureIata + "\ndepartureIcao: " + departureIcao + "\narrivalIata: " + arrivalIata + "\narrivalIcao: " + arrivalIcao + "\nairlineIata: " + airlineIata + "\nstatus: " + flightStatus);
 
     }, 'json')
-    .done(function(data2) {
-	//CREATE MESSAGE FOR USER
-	console.log('Nested PROMISE', data2);
-	console.log('airline: '+ airlineIcao + '  flightNum: ' + flight + '  zipcode: ' + zipCode);
-	let urlDriving = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='+ zipCode + '&destinations=' + arrivalIcao + '&key=AIzaSyBoRvW47xXGNrYz-LYR3TLHC-p18sPFIes';
-	console.log('DRIVING:\n' + urlDriving);
+    .done(function(dataB) {
+	alert('in 2nd NESTED LOOP');
+        //Query Aviation Edge Routes - NOT RELIABLE
+	let urlRoutes = 'http://aviation-edge.com/api/public/routes?key=ce8aa4-7c63af-d48024-815717-bfad64' + '&departureIata=' + departureIata + '&departureIcao=' + departureIcao + '&airlineIata=' + airlineIata + '&airlineIcao=' + airlineIcao + '&flightNumber=' + flight;
+        alert(urlRoutes);
+	console.log(urlRoutes);
+        $.get(urlRoutes, function (dataRoutes) {
+            console.log(dataRoutes);
+            arrivalTime = dataRoutes[0].arrivalTime;
+            alert('arrivalTime: ' + arrivalTime);
+        }, 'json');
 
-	$.get(urlDriving)
-	    .done(function (dataResult) {
-		//TEST DATA
-		let timeToLeave = '5:30 PM';
-		let timeToArrive = '6:30 PM';
+    }, 'json')
+	.done(function(data2) {
+	    //CREATE MESSAGE FOR USER
+	    console.log('3rd Nested PROMISE', data2);
+	    console.log('airline: '+ airlineIcao + '  flightNum: ' + flight + '  zipcode: ' + zipCode);
+	    let urlDriving = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='+ zipCode + '&destinations=' + arrivalIcao + '&key=AIzaSyBoRvW47xXGNrYz-LYR3TLHC-p18sPFIes';
+	    console.log('DRIVING:\n' + urlDriving);
+
+	    $.get(urlDriving)
+		.done(function (dataResult) {
+		    //TEST DATA
+		    let timeToLeave = '5:30 PM';
+		    let timeToArrive = '6:30 PM';
 
 
-		let driverTimeText = dataResult.rows[0].elements[0].duration.text;
-		let driverTimeValue = dataResult.rows[0].elements[0].duration.value; //in seconds
+		    let driverTimeText = dataResult.rows[0].elements[0].duration.text;
+		    let driverTimeValue = dataResult.rows[0].elements[0].duration.value; //in seconds
+		    let driverTimeDuration = dataResult.rows[0].elements[0].duration.value / 60; //in min
 
-		//resultTime = arrivalTime - (driverTimeValue / 60);
-		console.log('arrivalTime: ' + arrivalTime);
 
-		let resultText = 'Your best time to Leave is ' + timeToLeave + ' (to arrive at ' + timeToArrive + ')';
-		console.log('dataResult query  of DistanceMatrix: ' + dataResult.rows[0]);
-		$('#result').text(dataResult.rows[0].elements[0].duration.text);
-		//$('#result').text(resultText);
-	    });
-    });
+		    /*var date = new Date();
+		      var dateMillisec = date.getTime(); //Get from FlightAware
+		      console.log('\nOrig date/time:\n' + date + ' = ' + dateMillisec);
+		      
+		      var timePeriod = "00:30:00"; //30 minutes, so the format is HH:MM:SS
+		      var parts = timePeriod.split(/:/);
+		      var timePeriodMillis = (parseInt(parts[0], 10) * 60 * 60 * 1000) +
+                      (parseInt(parts[1], 10) * 60 * 1000) + 
+                      (parseInt(parts[2], 10) * 1000);
+
+		      var newDate = new Date();
+		      newDate.setTime(dateMillisec + timePeriodMillis);
+
+		      console.log('\ntimePeriodMillis:\n' + timePeriod + ' = ' + timePeriodMillis); //ex: Mon Feb 12 2018 06:04:40 GMT+0000 (UTC)
+		      console.log('\nnewDate:\n' + newDate); //ex: Mon Feb 12 2018 06:34:40 GMT+0000 (UTC)
+		    */
+		    
+
+		    //resultTime = arrivalTime - (driverTimeValue / 60);
+		    console.log('arrivalTime: ' + arrivalTime);
+
+		    let resultText = 'Your best time to Leave is ' + timeToLeave + ' (to arrive at ' + timeToArrive + ')';
+		    console.log('dataResult query  of DistanceMatrix: ' + dataResult.rows[0]);
+		    $('#result').text(dataResult.rows[0].elements[0].duration.value);
+		    //$('#result').text(resultText);
+		});
+	});
 
 };
