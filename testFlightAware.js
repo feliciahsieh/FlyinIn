@@ -1,15 +1,14 @@
 //GLOBAL VARS from previous query
 //Hard coded for now (Flights)
-var airlineIata = 'WN';  //'WN'; //'B6';
-var airlineIcao = 'SWA'; //'SWA'; //'JBU';
-var flight = 4718;       //4110; //615;
-var airportDepartureIata = 'SAN';
-var airportDepartureIcao = 'KSAN';
+var airlineIata = 'B6';  //'WN'; //'B6';
+var airlineIcao = 'JBU'; //'SWA'; //'JBU';
+var flight = 615;       //4110; //615;
+var airportDepartureIata = 'JFK';
+var airportDepartureIcao = 'KJFK';
 //GLOBAL VARS
 var flightDate;
-var messageLocaltime;
 var messageTZ;
-var messageFlightDelay;
+var flightDelay;
 var localtime;
 var uniqueFlightIata = airlineIata + flight;
 var uniqueFlightIcao = airlineIcao + flight;
@@ -45,7 +44,8 @@ client.registerMethod('getFlightInfoStatus', fxmlUrl + 'FlightInfoStatus', 'GET'
 var getFlightInfoStatusArgs = {
     parameters: {
         ident: uniqueFlightIcao,
-        howMany: 4,
+        howMany: 3,
+	offset: 0, //Doesn't work
         include_ex_data: false
     }
 };
@@ -54,20 +54,45 @@ client.methods.getFlightInfoStatus(getFlightInfoStatusArgs, function (data, resp
     console.log(data.FlightInfoStatusResult);
     console.log('Looking for ' + flightDate + ' ' + airportDepartureIcao);
     for (i = 0; i < data.FlightInfoStatusResult.flights.length; i++) {
-	console.log(data.FlightInfoStatusResult.flights[i].origin.code + ' ' + 
-		    data.FlightInfoStatusResult.flights[i].estimated_arrival_time.date + ' ' + 
-		    data.FlightInfoStatusResult.flights[i].estimated_arrival_time.time + ' ' + 
-		    data.FlightInfoStatusResult.flights[i].estimated_arrival_time.localtime + ' ' + 
-		    data.FlightInfoStatusResult.flights[i].estimated_arrival_time.tz + ' ' +
-		    data.FlightInfoStatusResult.flights[i].departure_delay/60 + ' min delay');
+	console.log('flights[i] code: ' + data.FlightInfoStatusResult.flights[i].origin.code + ' ' + 
+		    'EAT date: ' + data.FlightInfoStatusResult.flights[i].estimated_arrival_time.date + ' ' + 
+		    'EAT time(local PST):' + data.FlightInfoStatusResult.flights[i].estimated_arrival_time.time + ' ' + 
+		    'EAT localtime(Epoch): ' + data.FlightInfoStatusResult.flights[i].estimated_arrival_time.localtime + ' ' + 
+		    'EAT tz:' + data.FlightInfoStatusResult.flights[i].estimated_arrival_time.tz + ' ' +
+		    'departure_delay(sec):' + data.FlightInfoStatusResult.flights[i].departure_delay);
 
 	if (data.FlightInfoStatusResult.flights[i].estimated_arrival_time.date === flightDate &&
 	   (data.FlightInfoStatusResult.flights[i].origin.code === airportDepartureIcao) ) {
 	    console.log("FOUND IT");
+	    console.log('EAT STRUCTURE: ' + JSON.stringify(data.FlightInfoStatusResult.flights[i].estimated_arrival_time));
 	    messageTime = data.FlightInfoStatusResult.flights[i].estimated_arrival_time.time; 
-	    messageLocaltime = data.FlightInfoStatusResult.flights[i].estimated_arrival_time.localtime; //Epoch local 
+	    localtime = data.FlightInfoStatusResult.flights[i].estimated_arrival_time.localtime; //GMT Epoch local Runway estimated arrival time
 	    messageTZ = data.FlightInfoStatusResult.flights[i].estimated_arrival_time.tz;
-	    messageFlightDelay = data.FlightInfoStatusResult.flights[i].departure_delay / 60; //in min
+	    flightDelay = data.FlightInfoStatusResult.flights[i].departure_delay; //in sec
+
+	    //****** CALCULATE RESULT TIME FOR DRIVER ********
+	    let driveTime = 30 * 60 * 1000; //TESTING!!! Drive is 30 minutes but in milliseconds
+	    var FIarrivalTime = new Date(localtime * 1000).getTime();
+	    var FIdate = new Date(FIarrivalTime);
+	    console.log('ORIG:' + FIdate.toString());
+
+	    var FIresultTime = new Date(1518448920000 - driveTime).getTime();
+	    var FIresultDate = new Date(FIresultTime);
+	    console.log('NEW:' + FIresultDate.toString());
+
+	    //****** CALCULATE RESULT TIME FOR DRIVER ********
+	    let ampm, hh, mm;
+	    if (FIresultDate.getHours() > 11) { //0-23
+		ampm = 'PM';
+		hh = FIresultDate.getHours() % 12;
+	    } else {
+		ampm = 'AM';
+		hh = FIresultDate.getHours();
+	    }
+	    mm = FIresultDate.getMinutes();
+
+	    FIresultTimeFormatted = hh + ':' + mm + ' ' + ampm;
+	    console.log('FORMATTED TIME: ' + FIresultTimeFormatted);
 
 	    //Update webpage
 	    //$('#FAdate').text(data.FlightInfoStatusResult.flights[i].estimated_arrival_time.date);
