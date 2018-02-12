@@ -12,6 +12,7 @@ let url = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperi
     + driverStart + '&destinations=' + driverEnd + '&key=AIzaSyBoRvW47xXGNrYz-LYR3TLHC-p18sPFIes';
 
 //RUN JQUERY AJAX
+/*
 $.get(url)
     .done(function (data) {
 	let driverDurationText = data.rows[0].elements[0].duration.text;
@@ -26,4 +27,4 @@ $.get(url)
 
 	$('#result').text(data.rows[0].elements[0].duration.text);
     });
-
+*/

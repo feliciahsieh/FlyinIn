@@ -1,8 +1,8 @@
 //FILE: flyinin.js
 
 //GLOBAL VARS
-var formData = {
-};
+//var formData = {
+//};
 //$.formData = formData;
 
 var airlineIata = ''; //from user. Fix later
@@ -77,6 +77,26 @@ function checkPhoneNum (inputTxt) {
 
 
 function processInput() {
+    //INITIALIZE VALUES
+    zipCode = $('#FIZipCode').val();
+    //alert('zipcode: ' + zipCode);
+
+    //FIND TODAY'S SINGLE FLIGHT
+    let dte = new Date();
+    var mm, dd;
+    console.log(dte);
+    options = {"timeZone" : "America/Los_Angeles"};
+    let localDate = dte.toLocaleDateString('en-EN', options);
+    console.log('localDate' + localDate);
+    let local=localDate.split('/');
+    if(local[0].length === 1)
+	local[0] = '0' + local[0];
+    if(local[1].length === 1)
+	local[1] = '0' + local[1];
+    flightDate = local[0] + '/' + local[1] + '/' + local[2];
+    console.log("Calculating today as: " + flightDate);
+
+
     $("#FIAirline").val($("#FIAirline").val().toUpperCase());
     $("#FIOriginAirportIcao").val($("#FIOriginAirportIcao").val().toUpperCase());
     //console.log($("#FIAirline"));
@@ -132,7 +152,32 @@ function processInput() {
 	flightStatus = dataFlights[0].status;
 	alert("INSIDE!\ndepartureIata: " + departureIata + "\ndepartureIcao: " + departureIcao + "\narrivalIata: " + arrivalIata + "\narrivalIcao: " + arrivalIcao + "\nairlineIata: " + airlineIata + "\nstatus: " + flightStatus);
 
-    }, 'json');
+    }, 'json')
+    .done(function(data2) {
+	//CREATE MESSAGE FOR USER
+	console.log('Nested PROMISE', data2);
+	console.log('airline: '+ airlineIcao + '  flightNum: ' + flight + '  zipcode: ' + zipCode);
+	let urlDriving = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='+ zipCode + '&destinations=' + arrivalIcao + '&key=AIzaSyBoRvW47xXGNrYz-LYR3TLHC-p18sPFIes';
+	console.log('DRIVING:\n' + urlDriving);
 
-}
+	$.get(urlDriving)
+	    .done(function (dataResult) {
+		//TEST DATA
+		let timeToLeave = '5:30 PM';
+		let timeToArrive = '6:30 PM';
 
+
+		let driverTimeText = dataResult.rows[0].elements[0].duration.text;
+		let driverTimeValue = dataResult.rows[0].elements[0].duration.value; //in seconds
+
+		//resultTime = arrivalTime - (driverTimeValue / 60);
+		console.log('arrivalTime: ' + arrivalTime);
+
+		let resultText = 'Your best time to Leave is ' + timeToLeave + ' (to arrive at ' + timeToArrive + ')';
+		console.log('dataResult query  of DistanceMatrix: ' + dataResult.rows[0]);
+		$('#result').text(dataResult.rows[0].elements[0].duration.text);
+		//$('#result').text(resultText);
+	    });
+    });
+
+};
