@@ -87,19 +87,19 @@
 	<form onSubmit="processInput(event)">
 	  <div class="form-group">
 	    <label class="control-label" for="FIAirline">Airline</label>
-	    <input id="FIAirline" name="FIAirline" value="" type="text" class="form-control" placeholder="" onchange="window.checkAirline(this)" autofocus>
+	    <input id="FIAirline" name="FIAirline" value="" type="text" class="form-control" placeholder="" autofocus>
 	  </div>
 	  <div class="form-group">
-	    <label class="control-label" for="Flight">Flight Number</label>
-	    <input id="FlightNum" name="FlightNum" value="" type="number" class="form-control" placeholder="" onchange="window.checkFlightNum(this)">
+	    <label class="control-label" for="FIFlightNum">Flight Number</label>
+	    <input id="FIFlightNum" name="FIFlightNum" value="" type="number" class="form-control" placeholder="" onchange="checkFlightNum(this)">
 	  </div>
 	  <div class="form-group">
 	    <label class="control-label" for="FIOriginAirportIcao">Origin Airport</label>
-	    <input id="FIOriginAirportIcao" name="OriginAirportIcao" value="" type="text" class="form-control" placeholder="" onchange="window.checkOriginAirportIcao(this)">
+	    <input id="FIOriginAirportIcao" name="FIOriginAirportIcao" value="" type="text" class="form-control" placeholder="" onchange="checkOriginAirportIcao(this)">
 	  </div>
 	  <div class="form-group">
 	    <label class="control-label" for="FIZipCode">Driver Start Location (Zip Code)</label>
-	    <input id="FIZipCode" name="ZipCode" value="" type="text" class="form-control" placeholder="" onchange="window.checkZipCode(this)">
+	    <input id="FIZipCode" name="FIZipCode" value="" type="text" class="form-control" placeholder="" onchange="window.checkZipCode(this)">
 	  </div>
 	  <div class="form-group text-center">
 	    <!--button id="Submit" class="btn btn-primary">Submit</button-->
@@ -129,7 +129,7 @@
 	  let url2 = "&destination="
 	  let destination = "San Francisco Airport";
 	  let key = "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
-	  let zoom = "&zoom=9";
+	  let zoom = "&zoom=10";
 	  let totalURL = url1 + origin + url2 + destination + zoom + key;
 	  document.getElementById("drivingMap").src = totalURL;
 	</script>

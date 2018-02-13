@@ -19,10 +19,6 @@ var zipCode = '';
 var resultTime;
 var resultMessage;
 
-function checkAirline (inputTxt) {
-    //stub function for check
-}
-
 function checkFlightNum (inputTxt) {
     var flightNum = /^[0-9]{1,4}$/;
     if (inputTxt.value.match(flightNum)) {
@@ -63,20 +59,23 @@ function checkPhoneNum (inputTxt) {
 
 
 function processInput(e) {
-
     e.preventDefault();
+    //e.stopImmediatePropagation()
 
     //INITIALIZE VALUES
+    //Get USER's input
+    flight = $("#FIFlightNum").val();
+    console.log("User: flight#: " + $("#FIFlightNum").val());
     zipCode = $('#FIZipCode').val();
-    //alert('zipcode: ' + zipCode);
+    console.log("User: zipcode: " + $("#FIZipCode").val());
 
     //FIND TODAY'S SINGLE FLIGHT
     let dte = new Date();
     var mm, dd;
-    console.log(dte);
+    //console.log(dte);
     options = {"timeZone" : "America/Los_Angeles"};
     let localDate = dte.toLocaleDateString('en-EN', options);
-    console.log('localDate: ' + localDate);
+    //console.log('localDate: ' + localDate);
     let local=localDate.split('/');
     if(local[0].length === 1)
 	local[0] = '0' + local[0];
@@ -87,10 +86,10 @@ function processInput(e) {
 
     var arln = $("#FIAirline");
     arln.val(arln.val().toUpperCase());
-    console.log(arln.val());
+    console.log('User: airline: ' + arln.val());
 
     $("#FIOriginAirportIcao").val($("#FIOriginAirportIcao").val().toUpperCase());
-    console.log($("#FIOriginAirportIcao"));
+    console.log('User: origin aiport: ' + $("#FIOriginAirportIcao").val());
 
     //Get Airline input field
     switch (arln.val()) {
@@ -130,27 +129,30 @@ function processInput(e) {
 	airlineIcao = 'FI ERROR';
     }
 
-    //Get Flight Number input field
-    flight = $("#FlightNum").val();
     //Lookup Flight Info from AviationEdge
     console.log("airlineIata: " + airlineIata + " flight: " + flight);
-    zipCode = $("#FIZipCode").val();
 
     //Query Aviation Edge for basic Airport / Airline static info
     let urlFlights = 'https://aviation-edge.com/api/public/flights?&key=ce8aa4-7c63af-d48024-815717-bfad64' + '&flight[iataNumber]=' + airlineIata + flight;
     //alert(urlFlights);
     $.get(urlFlights, function (dataFlights) {
-	console.log(dataFlights);
+	console.log('DATAFLIGHTS: ' + dataFlights[0].departure);
 	departureIata = dataFlights[0].departure.iataCode;
+	console.log('departureIata: ' + departureIata);
 	departureIcao = dataFlights[0].departure.icaoCode;
+	console.log('departureIcao: ' + departureIcao);
 	arrivalIata = dataFlights[0].arrival.iataCode;
+	console.log('arrivalIata: ' + arrivalIata);
 	arrivalIcao = dataFlights[0].arrival.icaoCode;
+	console.log('arrivalIcao: ' + arrivalIcao);
 	airlineIata = dataFlights[0].airline.iataCode;
+	console.log('airlineIata: ' + airlineIata);
 	flightStatus = dataFlights[0].status;
+	console.log('flightStatus: ' + flightStatus);
 	alert("INSIDE!\ndepartureIata: " + departureIata + "\ndepartureIcao: " + departureIcao + "\narrivalIata: " + arrivalIata + "\narrivalIcao: " + arrivalIcao + "\nairlineIata: " + airlineIata + "\nstatus: " + flightStatus);
 
     }, 'json')
-    .then(function(dataB) {
+    .done(function(dataB) {
 	alert('in 2nd NESTED LOOP');
         //Query Aviation Edge Routes - NOT RELIABLE
 	let urlRoutes = 'http://aviation-edge.com/api/public/routes?key=ce8aa4-7c63af-d48024-815717-bfad64' + '&departureIata=' + departureIata + '&departureIcao=' + departureIcao + '&airlineIata=' + airlineIata + '&airlineIcao=' + airlineIcao + '&flightNumber=' + flight;
@@ -164,10 +166,11 @@ function processInput(e) {
         }, 'json');
 
     }, 'json')
-	.then(function(data2) {
+	.done(function(data2) {
 	    //CREATE MESSAGE FOR USER
 	    console.log('3rd Nested PROMISE', data2);
 	    console.log('airline: '+ airlineIcao + '  flightNum: ' + flight + '  zipcode: ' + zipCode);
+	    console.log('arrivalIcao: ' + arrivalIcao);
 	    let urlDriving = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='+ zipCode + '&destinations=' + arrivalIcao + '&key=AIzaSyBoRvW47xXGNrYz-LYR3TLHC-p18sPFIes';
 	    console.log('DRIVING:\n' + urlDriving);
 
@@ -215,7 +218,8 @@ function processInput(e) {
 		    //$('#result').text(resultText);
 
 		    //DRAW MAP
-		    $("#mapMain").html(`<div id="mapMain" class="span6 col-md-6 col-sm-6 col-xs-6">
+		    /*
+		    $("#drivingMap").html(`
 				       <iframe id="drivingMap" width="100%" height="100%" style="border:0" allowfullscreen></iframe>
 				       <script>
 				       let url1 = "https://www.google.com/maps/embed/v1/directions?origin=";
@@ -225,9 +229,8 @@ function processInput(e) {
 				       let key = "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
 				       let totalURL = url1 + origin + url2 + destination + key;
 				       document.getElementById("drivingMap").src = totalURL;
-				       </script>
-				       </div>
-				       </div>`);
+				       </script>`);
+		    */
 
 		});
 	});
