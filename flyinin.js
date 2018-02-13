@@ -76,7 +76,10 @@ function checkPhoneNum (inputTxt) {
 }
 
 
-function processInput() {
+function processInput(e) {
+
+    e.preventDefault();
+
     //INITIALIZE VALUES
     zipCode = $('#FIZipCode').val();
     //alert('zipcode: ' + zipCode);
@@ -96,42 +99,42 @@ function processInput() {
     flightDate = local[0] + '/' + local[1] + '/' + local[2];
     console.log("Calculating today as: " + flightDate);
 
-
-    $("#FIAirline").val($("#FIAirline").val().toUpperCase());
-    $("#FIOriginAirportIcao").val($("#FIOriginAirportIcao").val().toUpperCase());
+    var fieldAirline = $("#FIAirline");
+    fieldAirline.val().toUpperCase();
+    $("#FIOriginAirportIcao").val().toUpperCase();
     //console.log($("#FIAirline"));
     console.log($("#FIOriginAirportIcao"));
     //Get Airline input field
-    switch ($("#FIAirline").val()) {
+    switch (fieldAirline.val()) {
     case 'JBU':
-	airlineIcao = $("#FIAirline").val();
+	airlineIcao = fieldAirline.val();
 	airlineIata = 'B6';
 	break;
     case 'B6':
-	airlineIata = $("#FIAirline").val();
+	airlineIata = fieldAirline.val();
 	airlineIcao = 'JBU';
 	break;
     case 'SWA':
-	airlineIcao = $("#FIAirline").val();
+	airlineIcao = fieldAirline.val();
 	airlineIata = 'WN';
 	break;
     case 'WN':
-	airlineIata = $("#FIAirline").val();
+	airlineIata = fieldAirline.val();
 	airlineIcao = 'SWA';
 	break;
     case 'ASA':
-	airlineIcao = $("#FIAirline").val();
+	airlineIcao = fieldAirline.val();
 	airlineIata = 'AS';
 	break;
     case 'WN':
-	airlineIata = $("#FIAirline").val();
+	airlineIata = fieldAirline.val();
 	airlineIcao = 'ASA';
 	break;
     case 'SKW':
-	airlineIcao = $("#FIAirline").val();
+	airlineIcao = fieldAirline.val();
 	airlineIata = 'OO';
     case 'OO':
-	airlineIata = $("#FIAirline").val();
+	airlineIata = fieldAirline.val();
 	airlineIcao = 'SKW';
 	break;
     default:
@@ -159,7 +162,7 @@ function processInput() {
 	alert("INSIDE!\ndepartureIata: " + departureIata + "\ndepartureIcao: " + departureIcao + "\narrivalIata: " + arrivalIata + "\narrivalIcao: " + arrivalIcao + "\nairlineIata: " + airlineIata + "\nstatus: " + flightStatus);
 
     }, 'json')
-    .done(function(dataB) {
+    .then(function(dataB) {
 	alert('in 2nd NESTED LOOP');
         //Query Aviation Edge Routes - NOT RELIABLE
 	let urlRoutes = 'http://aviation-edge.com/api/public/routes?key=ce8aa4-7c63af-d48024-815717-bfad64' + '&departureIata=' + departureIata + '&departureIcao=' + departureIcao + '&airlineIata=' + airlineIata + '&airlineIcao=' + airlineIcao + '&flightNumber=' + flight;
@@ -172,7 +175,7 @@ function processInput() {
         }, 'json');
 
     }, 'json')
-	.done(function(data2) {
+	.then(function(data2) {
 	    //CREATE MESSAGE FOR USER
 	    console.log('3rd Nested PROMISE', data2);
 	    console.log('airline: '+ airlineIcao + '  flightNum: ' + flight + '  zipcode: ' + zipCode);
@@ -216,6 +219,25 @@ function processInput() {
 		    console.log('dataResult query  of DistanceMatrix: ' + dataResult.rows[0]);
 		    $('#result').text(dataResult.rows[0].elements[0].duration.value);
 		    //$('#result').text(resultText);
+
+		    //DRAW MAP
+		    //src = 'https://www.google.com/maps/embed/v1/directions?origin=' + origin + '&destination=' + '&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0';
+		    //document.getElementById("drivingMap").src = totalURL;
+		    /* FROM index.html
+		      <div id="mapMain" class="span6 col-md-6 col-sm-6 col-xs-6">
+			<iframe id="drivingMap" width="100%" height="100%" style="border:0" allowfullscreen></iframe>
+			<script>
+			  let url1 = "https://www.google.com/maps/embed/v1/directions?origin=";
+		      let origin = "94546";
+		      let url2 = "&destination="
+		      let destination = "KOAK";
+		      let key = "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
+		      let totalURL = url1 + origin + url2 + destination + key;
+		      document.getElementById("drivingMap").src = totalURL;
+		    </script>
+		    </div>
+		    */
+
 		});
 	});
 
