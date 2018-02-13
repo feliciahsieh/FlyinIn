@@ -233,11 +233,27 @@ function processInput(e) {
 			finalTime = hh + ':' + mm + ' ' + ampm;
 			console.log('FINAL TIME: ' + finalTime);
 			//******CALCULATE DRIVE TIME*******/
+			let tempAMPM;
+			let resultText = 'Your best time to leave is <B><I>' + finalTime;
+			resultText = resultText + "</B></I><BR>Your Estimated drive time is: " + driverTimeText;
+			resultText = resultText + "<BR>Flight " + airlineIcao + flight + " from " + departureIcao + " to " + arrivalIcao;
+			let tempHH = arrivalTime.getHours();			
+			let tempMM = arrivalTime.getMinutes();
+			if (tempHH > 11) { //0-23
+			    tempAMPM = 'PM';
+			    tempHH = tempHH % 12;
+			} else {
+			    tempAMPM = 'AM';
+			}
+			if (tempMM < 10) {
+			    tempMM = '0' + tempMM;
+			}
+			tempTime = tempHH + ':' + tempMM + ' ' + tempAMPM;
 
-			let resultText = 'Your best time to leave is ' + finalTime;
+			let txt = tempHH + ":" + tempMM;
+			resultText = resultText + "<BR>Arriving at: " + tempTime;
 			console.log('dataResult query of DistanceMatrix: ' + dataResult.rows[0].toString());
-			//$('#result').text(finalTime);
-			$('#result').text(resultText);
+			$('#result').html(resultText);
 
 			//DRAW MAP
 			/*
