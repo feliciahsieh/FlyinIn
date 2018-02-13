@@ -175,11 +175,7 @@ function processInput(e) {
 	    console.log('DRIVING:\n' + urlDriving);
 
 	    $.get(urlDriving)
-		.then(function (dataResult) {
-		    //TEST DATA
-		    let timeToLeave = '5:30 PM';
-		    let timeToArrive = '6:30 PM';
-
+		.done(function (dataResult) {
 
 		    let driverTimeText = dataResult.rows[0].elements[0].duration.text;
 		    let driverTimeValue = dataResult.rows[0].elements[0].duration.value; //in seconds
