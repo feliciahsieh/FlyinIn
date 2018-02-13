@@ -13,21 +13,22 @@
     <link rel="stylesheet" href="css/flyinin.css">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <script type="text/javascript" src="flyinin.js"></script>
     <script
        src="http://code.jquery.com/jquery-3.3.1.min.js"
        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
        crossorigin="anonymous">
     </script>
+    <script type="text/javascript" src="flyinin.js"></script>
 <!-- AUTOCOMPLETE for AIRLINE field -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>
       $( function() {
       let availableTags = [
-         "JBU",
-         "SWA",
-         "VRD"
+        "ASA",
+        "JBU",
+        "SWA",
+        "VRD"
       ];
       $( "#FIAirline" ).autocomplete({
          source: availableTags
@@ -86,19 +87,19 @@
 	<form onSubmit="processInput(event)">
 	  <div class="form-group">
 	    <label class="control-label" for="FIAirline">Airline</label>
-	    <input id="FIAirline" name="Airline" value="" type="text" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkAirline(this)" autofocus>
+	    <input id="FIAirline" name="FIAirline" value="" type="text" class="form-control" placeholder="" onchange="window.checkAirline(this)" autofocus>
 	  </div>
 	  <div class="form-group">
 	    <label class="control-label" for="Flight">Flight Number</label>
-	    <input id="FlightNum" name="FlightNum" value="" type="number" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkFlightNum(this)">
+	    <input id="FlightNum" name="FlightNum" value="" type="number" class="form-control" placeholder="" onchange="window.checkFlightNum(this)">
 	  </div>
 	  <div class="form-group">
 	    <label class="control-label" for="FIOriginAirportIcao">Origin Airport</label>
-	    <input id="FIOriginAirportIcao" name="OriginAirportIcao" value="" type="text" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkOriginAirportIcao(this)">
+	    <input id="FIOriginAirportIcao" name="OriginAirportIcao" value="" type="text" class="form-control" placeholder="" onchange="window.checkOriginAirportIcao(this)">
 	  </div>
 	  <div class="form-group">
 	    <label class="control-label" for="FIZipCode">Driver Start Location (Zip Code)</label>
-	    <input id="FIZipCode" name="ZipCode" value="" type="text" class="form-control" placeholder="" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkZipCode(this)">
+	    <input id="FIZipCode" name="ZipCode" value="" type="text" class="form-control" placeholder="" onchange="window.checkZipCode(this)">
 	  </div>
 	  <div class="form-group text-center">
 	    <!--button id="Submit" class="btn btn-primary">Submit</button-->
@@ -113,7 +114,7 @@
 	<form onsubmit="sendTextMsg()">
 	  <div class="form-group">
 	    <label class="control-label" for="Phone">Phone Number</label>
-	    <input id="Phone" name="Phone" value="" type="tel" class="form-control" placeholder="Phone Number" size="13" onfocus="inputFocus(this)" onblur="inputBlur(this)" onchange="checkPhoneNum(this)">
+	    <input id="Phone" name="Phone" value="" type="tel" class="form-control" placeholder="Phone Number" size="13" onchange="checkPhoneNum(this)">
 	  </div>
 	  <div class="form-group text-center">
 	    <button id="buttonTextMe" type="button" class="btn btn-primary">Text Me</button>
@@ -124,11 +125,12 @@
 	<iframe id="drivingMap" width="100%" height="100%" style="border:0" allowfullscreen></iframe>
 	<script>
 	  let url1 = "https://www.google.com/maps/embed/v1/directions?origin=";
-	  let origin = "94546";
+	  let origin = "Holberton School, San Franisco, CA";
 	  let url2 = "&destination="
-	  let destination = "KOAK";
+	  let destination = "San Francisco Airport";
 	  let key = "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
-	  let totalURL = url1 + origin + url2 + destination + key;
+	  let zoom = "&zoom=9";
+	  let totalURL = url1 + origin + url2 + destination + zoom + key;
 	  document.getElementById("drivingMap").src = totalURL;
 	</script>
       </div>
