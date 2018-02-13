@@ -153,7 +153,7 @@ function processInput(e) {
 
     }, 'json')
     .done(function(dataB) {
-	alert('in 2nd NESTED LOOP');
+	alert('2nd NESTED LOOP: Query Aviation Edge Routes');
         //Query Aviation Edge Routes - NOT RELIABLE
 	let urlRoutes = 'http://aviation-edge.com/api/public/routes?key=ce8aa4-7c63af-d48024-815717-bfad64' + '&departureIata=' + departureIata + '&departureIcao=' + departureIcao + '&airlineIata=' + airlineIata + '&airlineIcao=' + airlineIcao + '&flightNumber=' + flight;
         alert(urlRoutes);
@@ -161,72 +161,94 @@ function processInput(e) {
 	console.log(urlRoutes);
         $.get(urlRoutes, function (dataRoutes) {
             console.log(dataRoutes);
-            arrivalTime = dataRoutes[0].arrivalTime;
-            alert('arrivalTime: ' + arrivalTime);
-        }, 'json');
 
-    }, 'json')
-	.done(function(data2) {
-	    //CREATE MESSAGE FOR USER
-	    console.log('3rd Nested PROMISE', data2);
-	    console.log('airline: '+ airlineIcao + '  flightNum: ' + flight + '  zipcode: ' + zipCode);
-	    console.log('arrivalIcao: ' + arrivalIcao);
-	    let urlDriving = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='+ zipCode + '&destinations=' + arrivalIcao + '&key=AIzaSyBoRvW47xXGNrYz-LYR3TLHC-p18sPFIes';
-	    console.log('DRIVING:\n' + urlDriving);
+            let landingTime = dataRoutes[0].arrivalTime; //format '15:15:00'
+	    //console.log('landingTime: ' + landingTime);
+	    var ar = landingTime.split(':');
+	    //console.log("AR: " + ar);
 
-	    $.get(urlDriving)
-		.done(function (dataResult) {
+	    var landingT = new Date();
+	    //console.log("landingT: " + landingT);
+	    landingT.setHours(+ar[0], +ar[1], 0);
+	    //console.log('landingT: ' + landingT);
+	    
+	    arrivalTime = landingT;
+	    console.log("ARRIVALTIME: " + arrivalTime);
 
-		    let driverTimeText = dataResult.rows[0].elements[0].duration.text;
-		    let driverTimeValue = dataResult.rows[0].elements[0].duration.value; //in seconds
-		    let driverTimeDuration = dataResult.rows[0].elements[0].duration.value / 60; //in min
+        }, 'json')
 
-		    //******CALCULATE DRIVE TIME*******/
-		    var driveTime = 30 * 60 * 1000; // TEST 30 minutes
-		    var walkToCurb = 15 * 60 * 1000;
-		    console.log('MINUS 30 min DRIVE TIME');
+	    .done(function(data2) {
+		//CREATE MESSAGE FOR USER
+		console.log('3rd Nested PROMISE', data2);
+		console.log('airline: '+ airlineIcao + '  flightNum: ' + flight + '  zipcode: ' + zipCode);
+		console.log('arrivalIcao: ' + arrivalIcao);
+		let urlDriving = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='+ zipCode + '&destinations=' + arrivalIata + '&key=AIzaSyApQx97pXZTl1IOF1t-F7OnQTndQzU-QUs';
+		console.log('DRIVING:\n' + urlDriving);
+		console.log("URLDRIVING: " + urlDriving);
+		$.get(urlDriving)
+		    .done(function (dataResult) {
+
+			let driverTimeText = dataResult.rows[0].elements[0].duration.text;
+			console.log("driverTimeText: " + dataResult.rows[0].elements[0].duration.text);
+
+			let driverTimeValue = dataResult.rows[0].elements[0].duration.value; //in seconds. USE FOR CALCULATION
+			console.log("driverTimeValue: " + dataResult.rows[0].elements[0].duration.value);
+			console.log("driverTimeValue (min): " + dataResult.rows[0].elements[0].duration.value/60);
+
+			let driverTimeQuery = dataResult.rows[0].elements[0].status;
+			console.log("driverTimeQuery: " + dataResult.rows[0].elements[0].status);
+
+			//******CALCULATE DRIVE TIME*******/
+			//Date.prototype.addHours = function(h) {
+			//this.setTime(this.getTime() + (h*60*60*1000)); 
+			//return this;   
+			//}
+
+			var walkToCurb = 15 * 60;
+			console.log("walkToCurb: ", walkToCurb);
 		    
-		    var time = new Date(arrivalTime * 1000).getTime();
-		    var date = new Date(time);
-		    console.log('ORIG: ' + date.toString());
+			var time = new Date(arrivalTime); //Already in local time
+			console.log('typeof(time): ' + typeof(arrivalTime));
+			console.log('ORIG:     ' + arrivalTime);
 
-		    var time2 = new Date((arrivalTime * 1000) + walkToCurb - driveTime).getTime();
-		    var date2 = new Date(time2);
-		    console.log('NEW:  ' + date2.toString());
+			var offset = (walkToCurb - driverTimeValue) * 1000;
+			time.setTime(time.getTime() + offset);			
+			console.log('UPDATED:  ' + time);
 
-		    let ampm, hh, mm;
-		    if (date2.getHours() > 11) { //0-23
-			ampm = 'PM';
-			hh = date2.getHours() % 12;
-		    } else {
-			ampm = 'AM';
-			hh = date2.getHours();
-		    }
-		    mm = date2.getMinutes();
+			let ampm, hh, mm;
+			if (time.getHours() > 11) { //0-23
+			    ampm = 'PM';
+			    hh = time.getHours() % 12;
+			} else {
+			    ampm = 'AM';
+			    hh = time.getHours();
+			}
+			mm = time.getMinutes();
 
-		    finalTime = hh + ':' + mm + ' ' + ampm;
-		    console.log('FINAL TIME: ' + finalTime);
-		    //******CALCULATE DRIVE TIME*******/
+			finalTime = hh + ':' + mm + ' ' + ampm;
+			console.log('FINAL TIME: ' + finalTime);
+			//******CALCULATE DRIVE TIME*******/
 
-		    let resultText = 'Your best time to Leave is ' + finalTime + ' (to arrive at ' + timeToArrive + ')';
-		    console.log('dataResult query  of DistanceMatrix: ' + dataResult.rows[0]);
-		    $('#result').text(dataResult.rows[0].elements[0].duration.value);
-		    //$('#result').text(resultText);
+			let resultText = 'Your best time to Leave is ' + finalTime;
+			console.log('dataResult query  of DistanceMatrix: ' + dataResult.rows[0]);
+			$('#result').text(dataResult.rows[0].elements[0].duration.value);
+			//$('#result').text(resultText);
 
-		    //DRAW MAP
-		    /*
-		    $("#drivingMap").html(`
-				       <iframe id="drivingMap" width="100%" height="100%" style="border:0" allowfullscreen></iframe>
-				       <script>
-				       let url1 = "https://www.google.com/maps/embed/v1/directions?origin=";
-				       let origin = zipCode;
-				       let url2 = "&destination="
-				       let destination = arrivalIcao + ' airport';
-				       let key = "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
-				       let totalURL = url1 + origin + url2 + destination + key;
-				       document.getElementById("drivingMap").src = totalURL;
-				       </script>`);
-		    */
+			//DRAW MAP
+			/*
+			  $("#drivingMap").html(`
+			  <iframe id="drivingMap" width="100%" height="100%" style="border:0" allowfullscreen></iframe>
+			  <script>
+			  let url1 = "https://www.google.com/maps/embed/v1/directions?origin=";
+			  let origin = zipCode;
+			  let url2 = "&destination="
+			  let destination = arrivalIcao + ' airport';
+			  let key = "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
+			  let totalURL = url1 + origin + url2 + destination + key;
+			  document.getElementById("drivingMap").src = totalURL;
+			  </script>`);
+			*/
+		    }, 'json')
 
 		});
 	});
