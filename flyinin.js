@@ -193,7 +193,7 @@ function processInput(e) {
 
 			let driverTimeValue = dataResult.rows[0].elements[0].duration.value; //in seconds. USE FOR CALCULATION
 			console.log("driverTimeValue: " + dataResult.rows[0].elements[0].duration.value);
-			console.log("driverTimeValue (min): " + dataResult.rows[0].elements[0].duration.value/60);
+			console.log("driverTimeValue (min): " + dataResult.rows[0].elements[0].duration.value / 60);
 
 			let driverTimeQuery = dataResult.rows[0].elements[0].status;
 			console.log("driverTimeQuery: " + dataResult.rows[0].elements[0].status);
@@ -211,9 +211,10 @@ function processInput(e) {
 			console.log('typeof(time): ' + typeof(arrivalTime));
 			console.log('ORIG:     ' + arrivalTime);
 
-			var offset = (walkToCurb - driverTimeValue) * 1000;
-			time.setTime(time.getTime() + offset);			
-			console.log('UPDATED:  ' + time);
+			var offset = (walkToCurb - driverTimeValue) * 1000; //walkToCurb (sec) + driverTimeValue (sec) but convert ms
+			console.log('offset: ' + offset);
+			time.setTime(time.getTime() + offset);
+			console.log('UPDATED TIME:  ' + time);
 
 			let ampm, hh, mm;
 			if (time.getHours() > 11) { //0-23
@@ -223,16 +224,20 @@ function processInput(e) {
 			    ampm = 'AM';
 			    hh = time.getHours();
 			}
-			mm = time.getMinutes();
+			if (time.getMinutes() < 10) { //0-59
+			    mm = '0' + time.getMinutes();
+			} else {
+			    mm = time.getMinutes();
+			}
 
 			finalTime = hh + ':' + mm + ' ' + ampm;
 			console.log('FINAL TIME: ' + finalTime);
 			//******CALCULATE DRIVE TIME*******/
 
-			let resultText = 'Your best time to Leave is ' + finalTime;
-			console.log('dataResult query  of DistanceMatrix: ' + dataResult.rows[0]);
-			$('#result').text(dataResult.rows[0].elements[0].duration.value);
-			//$('#result').text(resultText);
+			let resultText = 'Your best time to leave is ' + finalTime;
+			console.log('dataResult query of DistanceMatrix: ' + dataResult.rows[0].toString());
+			//$('#result').text(finalTime);
+			$('#result').text(resultText);
 
 			//DRAW MAP
 			/*
