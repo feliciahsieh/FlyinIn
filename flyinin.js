@@ -205,11 +205,11 @@ function processInput(e) {
 			//}
 
 			var walkToCurb = 15 * 60;
-			console.log("walkToCurb: ", walkToCurb);
+			console.log("walkToCurb (sec): " + walkToCurb + " = " + (walkToCurb / 60) + " min" );
 		    
 			var time = new Date(arrivalTime); //Already in local time
 			console.log('typeof(time): ' + typeof(arrivalTime));
-			console.log('ORIG:     ' + arrivalTime);
+			console.log('ORIG ARRIVAL: ' + arrivalTime);
 
 			var offset = (walkToCurb - driverTimeValue) * 1000; //walkToCurb (sec) + driverTimeValue (sec) but convert ms
 			console.log('offset: ' + offset);
@@ -252,23 +252,17 @@ function processInput(e) {
 
 			let txt = tempHH + ":" + tempMM;
 			resultText = resultText + "<BR>Arriving at: " + tempTime;
-			console.log('dataResult query of DistanceMatrix: ' + dataResult.rows[0].toString());
+			console.log('dataResult query of DistanceMatrix: ' + dataResult.rows[0].elements[0]);
 			$('#result').html(resultText);
 
 			//DRAW MAP
-			/*
+			
 			  $("#drivingMap").html(`
 			  <iframe id="drivingMap" width="100%" height="100%" style="border:0" allowfullscreen></iframe>
 			  <script>
-			  let url1 = "https://www.google.com/maps/embed/v1/directions?origin=";
-			  let origin = zipCode;
-			  let url2 = "&destination="
-			  let destination = arrivalIcao + ' airport';
-			  let key = "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
-			  let totalURL = url1 + origin + url2 + destination + key;
-			  document.getElementById("drivingMap").src = totalURL;
+			  document.getElementById("drivingMap").src = "https://www.google.com/maps/embed/v1/directions?origin=" + zipCode + "&destination=" + arrivalIcao + ' airport' + "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
 			  </script>`);
-			*/
+			
 		    }, 'json')
 
 		});
