@@ -58,6 +58,7 @@ function checkPhoneNum (inputTxt) {
 
 
 function processInput(e) {
+    alert("PROCESSINPUT()");
     e.preventDefault();
     //e.stopImmediatePropagation()
 
@@ -142,7 +143,7 @@ function processInput(e) {
     let urlFlights = 'https://aviation-edge.com/api/public/flights?&key=ce8aa4-7c63af-d48024-815717-bfad64' + '&flight[iataNumber]=' + airlineIata + flight;
     //alert(urlFlights);
     $.get(urlFlights, function (dataFlights) {
-	console.log('DATAFLIGHTS: ' + dataFlights[0].departure);
+	//console.log('DATAFLIGHTS: ' + dataFlights[0].departure);
 	departureIata = dataFlights[0].departure.iataCode;
 	console.log('departureIata: ' + departureIata);
 	departureIcao = dataFlights[0].departure.icaoCode;
@@ -155,14 +156,14 @@ function processInput(e) {
 	console.log('airlineIata: ' + airlineIata);
 	flightStatus = dataFlights[0].status;
 	console.log('flightStatus: ' + flightStatus);
-	alert("INSIDE!\ndepartureIata: " + departureIata + "\ndepartureIcao: " + departureIcao + "\narrivalIata: " + arrivalIata + "\narrivalIcao: " + arrivalIcao + "\nairlineIata: " + airlineIata + "\nstatus: " + flightStatus);
+	//alert("INSIDE!\ndepartureIata: " + departureIata + "\ndepartureIcao: " + departureIcao + "\narrivalIata: " + arrivalIata + "\narrivalIcao: " + arrivalIcao + "\nairlineIata: " + airlineIata + "\nstatus: " + flightStatus);
 
     }, 'json')
     .done(function(dataB) {
-	alert('2nd NESTED LOOP: Query Aviation Edge Routes');
+	//alert('2nd NESTED LOOP: Query Aviation Edge Routes');
         //Query Aviation Edge Routes - NOT RELIABLE
 	let urlRoutes = 'http://aviation-edge.com/api/public/routes?key=ce8aa4-7c63af-d48024-815717-bfad64' + '&departureIata=' + departureIata + '&departureIcao=' + departureIcao + '&airlineIata=' + airlineIata + '&airlineIcao=' + airlineIcao + '&flightNumber=' + flight;
-        alert(urlRoutes);
+        //alert(urlRoutes);
 	//https://aviation-edge.com/api/public/routes?key=ce8aa4-7c63af-d48024-815717-bfad64&departureIata=SEA&departureIcao=KSEA&airlineIata=AS&airlineIcao=ASA&flightNumber=360
 	console.log(urlRoutes);
         $.get(urlRoutes, function (dataRoutes) {
@@ -240,9 +241,9 @@ function processInput(e) {
 			console.log('FINAL TIME: ' + finalTime);
 			//******CALCULATE DRIVE TIME*******/
 			let tempAMPM;
-			let resultText = 'Your best time to leave is <B><I>' + finalTime;
-			resultText = resultText + "</B></I><BR>Your Estimated drive time is: " + driverTimeText;
-			resultText = resultText + "<BR>Flight " + airlineIcao + flight + " from " + departureIcao + " to " + arrivalIcao;
+			let resultText = 'Your best time to leave is <B><I><U>' + finalTime;
+			resultText = resultText + "</U></I></B><BR>Your Estimated drive time is " + driverTimeText + ".";
+			resultText = resultText + "<BR>The flight " + airlineIcao + flight + " from " + departureIcao + " to " + arrivalIcao;
 			let tempHH = arrivalTime.getHours();			
 			let tempMM = arrivalTime.getMinutes();
 			if (tempHH > 11) { //0-23
@@ -257,7 +258,7 @@ function processInput(e) {
 			tempTime = tempHH + ':' + tempMM + ' ' + tempAMPM;
 
 			let txt = tempHH + ":" + tempMM;
-			resultText = resultText + "<BR>Arriving at: " + tempTime;
+			resultText = resultText + "<BR>is arriving at: " + tempTime;
 			console.log('dataResult query of DistanceMatrix: ' + dataResult.rows[0].elements[0]);
 			$('#result').html(resultText);
 
@@ -277,6 +278,10 @@ function processInput(e) {
 };
 
 function processTextMessage() {
+    alert('IN PROCESSTEXTMESSAGE()');
+    e.preventDefault();
+    //e.stopImmediatePropagation()
+
     let FIphone = '+14156894700';
     let phoneNum = '+1' + $('#Phone').val();
     let message = $("#resultText").text();

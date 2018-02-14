@@ -37,16 +37,6 @@
     </script>
   </head>
   <body>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id))
-      return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.12';
-      fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
-    
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#"><img src="images/LogoFlyinIn.png" width="50" alt="Flyin' In logo"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -102,22 +92,21 @@
 	    <input id="FIZipCode" name="FIZipCode" value="" type="text" class="form-control" placeholder="" onchange="window.checkZipCode(this)">
 	  </div>
 	  <div class="form-group text-center">
-	    <!--button id="Submit" class="btn btn-primary">Submit</button-->
 	    <button class="btn btn-primary" type="submit">Submit</button>
 	  </div>
 	  <!-- ********RESULT OF QUERY BELOW ********-->
 	  <div class="form-group">
-	    <div class="container text-center bg-warning" id="result">RESULT</div>
+	    <div class="container text-center bg-warning" id="result"></div>
 	  </div>
 	  <!-- ********RESULT OF QUERY ABOVE ********-->
 	</form>
-	<form onsubmit="processTextMessage()">
+	<form onSubmit="processTextMessage(event)">
 	  <div class="form-group">
 	    <label class="control-label" for="Phone">Phone Number</label>
 	    <input id="Phone" name="Phone" value="" type="tel" class="form-control" placeholder="Phone Number" size="13" onchange="checkPhoneNum(this)">
 	  </div>
 	  <div class="form-group text-center">
-	    <button id="buttonTextMe" type="button" class="btn btn-primary">Text Me</button>
+	    <button class="btn btn-primary" type="submit" id="buttonTextMe">Text Me</button>
 	  </div>
 	</form>
       </div>
