@@ -3,8 +3,7 @@
 <p align="center"><img src="images/LogoFlyinIn.png" width="150px" /></p>
 
 ## Welcome
-Flyin' In is written in Javascript, JQuery/AJAX, Bootstrap and uses API's from Twilio, FlightAware, Aviation Edge, and Google Maps.
-This App is UNDER CONSTRUCTION. Please be patient as I am actively developing it and hope to have a working version by mid-February. Thanks.
+Flyin' In is written in Javascript, JQuery/AJAX, Bootstrap and uses API's from Twilio, Aviation Edge, and Google Maps. FlightAware is under evaluation.
 
 ## Table of Contents
 * [Requirements](#requirements)
@@ -22,39 +21,36 @@ This App is UNDER CONSTRUCTION. Please be patient as I am actively developing it
 * FlightAware API
   -FlightXML (v2.0)
   -Javascript module, node-rest-client (v3.1.0)
-* FlightAware API (with valid FlightAware account and token for Beta FlightXML3)
 * Aviation Edge API (with valid API account and key for Premium level)
+* (UNUSED) FlightAware API (with valid FlightAware account and token for Beta FlightXML3)
 * Google Maps API (with valid Google API account and token)
 * jsTimezoneDetect (Time Zone) and moment.js (Local Time) library files
+* expressJS
+* CORS
+* body-parser
+* request
 
-  -See https://www.thesoftwareguy.in/detect-user-timezone-using-javascript/
 * NPM
 * JQuery (v3.2.1)
 * Ajax (v1.12.9)
 * HTML5 / CSS
 * Bootstrap (v4.0.0)
 * Web browser using HTML5
-* Semistandard (12.0.0) for Javascript styling
 
 ## Installation
 Set your computer ENVIRONMENT variables,
 TWILIO_SID, TWILIO_TOKEN, FLIGHTAWARE_USER, FLIGHTAWARE_API3, GMAPSDIST  to your values and export them.
 
 In your terminal, git clone the directory with the following command:
+
 ```
 git clone https://github.com/feliciahsieh/flyinin.git
-```
-
-```
 npm init (and fill out to create your package.json)
-```
-
-```
 npm install node-rest-client
-```
-
-```
 npm install twilio
+npm install express
+npm install cors
+npm install request
 ```
 
 ## Usage
