@@ -16,8 +16,7 @@ var flightStatus = ''; //from AviationEdge QUERY 1
 var arrivalTime; //from AviationEdge QUERY 2
 var zipCode = '';
 //DERIVED GLOBAL VARS
-var resultTime;
-var resultMessage;
+var resultText;
 
 function checkFlightNum (inputTxt) {
     var flightNum = /^[0-9]{1,4}$/;
@@ -116,6 +115,13 @@ function processInput(e) {
     case 'AS':
 	airlineIata = arln.val();
 	airlineIcao = 'ASA';
+	break;
+    case 'AAL':
+	airlineIcao = arln.val();
+	airlineIata = 'AA';
+    case 'AA':
+	airlineIata = arln.val();
+	airlineIcao = 'AAL';
 	break;
     case 'SKW':
 	airlineIcao = arln.val();
@@ -269,3 +275,32 @@ function processInput(e) {
 	});
 
 };
+
+function processTextMessage() {
+    let FIphone = '+14156894700';
+    let phoneNum = '+1' + $('#Phone').val();
+    let message = $("#resultText").text();
+    let urlTwilio = 'http://localhost:8080/api/twilio/post';
+
+    let data = {
+	'phoneNum' : phoneNum,
+	'FIphone' : FIphone,
+    	'message' : message,
+    }
+
+    console.log("Sending to Twilio: " + urlTwilio);
+    $.get(urlTwilio)
+	.done(function (dataTwilio) {
+
+	    $.ajax({
+		type: 'POST',
+		url: urlTwilio,
+		data: data,
+		contentType: 'application/json',
+		success: function(js) {
+		    return "ok";
+		}
+	    });
+	});
+
+}
