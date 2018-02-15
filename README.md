@@ -16,7 +16,7 @@ Flyin' In is written in Javascript, JQuery/AJAX, Bootstrap and uses API's from T
 * Ubuntu (v14.04 LTS)
 * NodeJS (v6.12.3)
 * Node Rest Client
-* Twilio API (with valid Twilio account and token) (v3.11.1)
+* Twilio API (with valid Twilio account and token) (v3.11.3)
 * FlightAware API
   -FlightXML (v2.0)
   -Javascript module, node-rest-client (v3.1.0)
@@ -24,9 +24,9 @@ Flyin' In is written in Javascript, JQuery/AJAX, Bootstrap and uses API's from T
 * (UNUSED) FlightAware API (with valid FlightAware account and token for Beta FlightXML3)
 * Google Maps API (with valid Google API account and token)
 * jsTimezoneDetect (Time Zone) and moment.js (Local Time) library files
-* expressJS
-* CORS
-* body-parser
+* expressJS (v4.16.2)
+* cors (v2.8.4)
+* body-parser (v1.18.2)
 * request
 
 * NPM
@@ -48,6 +48,7 @@ npm init (and fill out to create your package.json)
 npm install node-rest-client
 npm install twilio
 npm install express
+npm install body-parser
 npm install cors
 npm install request
 ```
