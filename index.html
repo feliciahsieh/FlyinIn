@@ -89,7 +89,7 @@
 	  </div>
 	  <div class="form-group">
 	    <label class="control-label" for="FIZipCode">Driver Start Location (Zip Code)</label>
-	    <input id="FIZipCode" name="FIZipCode" value="" type="text" class="form-control" placeholder="" onchange="window.checkZipCode(this)">
+	    <input id="FIZipCode" name="FIZipCode" value="" type="text" class="form-control" placeholder="" autocomplete="postal-code" onchange="window.checkZipCode(this)">
 	  </div>
 	  <div class="form-group text-center">
 	    <button class="btn btn-primary" type="submit">Submit</button>
@@ -100,15 +100,15 @@
 	  </div>
 	  <!-- ********RESULT OF QUERY ABOVE ********-->
 	</form>
-	<form onSubmit="processTextMessage(event)">
+	<div><!-- onSubmit="processTextMessage(event)" method="post"-->
 	  <div class="form-group">
-	    <label class="control-label" for="Phone">Phone Number</label>
-	    <input id="Phone" name="Phone" value="" type="tel" class="form-control" placeholder="Phone Number" size="13" onchange="checkPhoneNum(this)">
+	    <label class="control-label" for="FIPhone">Phone Number</label>
+	    <input id="FIPhone" name="FIPhone" value="" type="tel" class="form-control" placeholder="Phone Number" size="13" onchange="checkPhoneNum(this)">
 	  </div>
 	  <div class="form-group text-center">
-	    <button class="btn btn-primary" type="submit" id="buttonTextMe">Text Me</button>
+	    <button class="btn btn-primary" type="submit" onclick="processTextMessage(event)" id="buttonTextMe">Text Me</button>
 	  </div>
-	</form>
+	</div>
       </div>
       <div id="mapMain" class="span6 col-md-6 col-sm-6 col-xs-6">
 	<iframe id="drivingMap" width="100%" height="100%" style="border:0" allowfullscreen></iframe>

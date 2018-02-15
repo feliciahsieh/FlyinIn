@@ -58,7 +58,6 @@ function checkPhoneNum (inputTxt) {
 
 
 function processInput(e) {
-    alert("PROCESSINPUT()");
     e.preventDefault();
     //e.stopImmediatePropagation()
 
@@ -241,9 +240,9 @@ function processInput(e) {
 			console.log('FINAL TIME: ' + finalTime);
 			//******CALCULATE DRIVE TIME*******/
 			let tempAMPM;
-			let resultText = 'Your best time to leave is <B><I><U>' + finalTime;
-			resultText = resultText + "</U></I></B><BR>Your Estimated drive time is " + driverTimeText + ".";
-			resultText = resultText + "<BR>The flight " + airlineIcao + flight + " from " + departureIcao + " to " + arrivalIcao;
+			resultText = 'Your best time to leave is <B><I><U>' + finalTime + '</U></I></B>.';
+			resultText = resultText + '<BR>Your Estimated drive time is ' + driverTimeText + '.';
+			resultText = resultText + '<BR>Their flight ' + airlineIcao + flight + ' from ' + departureIcao + ' to ' + arrivalIcao;
 			let tempHH = arrivalTime.getHours();			
 			let tempMM = arrivalTime.getMinutes();
 			if (tempHH > 11) { //0-23
@@ -258,7 +257,7 @@ function processInput(e) {
 			tempTime = tempHH + ':' + tempMM + ' ' + tempAMPM;
 
 			let txt = tempHH + ":" + tempMM;
-			resultText = resultText + "<BR>is arriving at: " + tempTime;
+			resultText = resultText + "<BR>is arriving at: " + tempTime + '.';
 			console.log('dataResult query of DistanceMatrix: ' + dataResult.rows[0].elements[0]);
 			$('#result').html(resultText);
 
@@ -277,35 +276,29 @@ function processInput(e) {
 
 };
 
-function processTextMessage() {
-    alert('IN PROCESSTEXTMESSAGE()');
-    e.preventDefault();
+function processTextMessage(e) {
+    //e.preventDefault();
     //e.stopImmediatePropagation()
 
-    let FIphone = '+14156894700';
-    let phoneNum = '+1' + $('#Phone').val();
-    let message = $("#resultText").text();
-    let urlTwilio = 'http://localhost:8080/api/twilio/post';
+    let userPhone = $('#FIPhone').val();
+    let msg = $('#result').text();
+    let urlTwilio = 'http://192.168.33.10:8888/api/twilio';
 
     let data = {
-	'phoneNum' : phoneNum,
-	'FIphone' : FIphone,
-    	'message' : message,
-    }
+    	"message" : msg,
+	"FIphone" : "4156894700",
+	"phoneNum" : userPhone,
+    };
 
-    console.log("Sending to Twilio: " + urlTwilio);
-    $.get(urlTwilio)
-	.done(function (dataTwilio) {
+    $.ajax({
+	type: 'POST',
+	url: urlTwilio,
+	data: data,
+	contentType: 'application/json',
+	success: function(js) {
+	    return "ok";
+	}
+    });
 
-	    $.ajax({
-		type: 'POST',
-		url: urlTwilio,
-		data: data,
-		contentType: 'application/json',
-		success: function(js) {
-		    return "ok";
-		}
-	    });
-	});
-
+    console.log("js: " + js);
 }

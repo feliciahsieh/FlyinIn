@@ -6,7 +6,7 @@ let twilio = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN)
 app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(cors({ origin: 'http://localhost:8080', credentials: true }));
+app.use(cors({ origin: '*', credentials: true }));
 
 app.post('/api/twilio', function(req, res){
 
@@ -21,7 +21,5 @@ app.post('/api/twilio', function(req, res){
     res.send(req.body);
   });
 app.listen(process.env.TWILIO_PORT || 3005, function(){
-    console.log("App running on port 3005");
+    console.log("App running on port " + process.env.TWILIO_PORT || 3005);
 });
-
-
