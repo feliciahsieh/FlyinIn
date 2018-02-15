@@ -34,8 +34,8 @@ function checkOriginAirportIcao (inputTxt) {
 }
 
 function checkZipCode (inputTxt) {
-    let zipCode = /^[0-9]{5}$/;
-    if (inputTxt.value.match(zipCode)) {
+    let regExzipCode = /^[0-9]{5}$/;
+    if (inputTxt.value.match(regExzipCode)) {
 	return true;
     } else {
 	alert('Zip Code should match the value nnnnn');
@@ -45,12 +45,12 @@ function checkZipCode (inputTxt) {
 }
 
 function checkPhoneNum (inputTxt) {
-    var phoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-    if (inputTxt.value.match(phoneNum)) {
+    var regExphoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+    if (inputTxt.value.match(regExphoneNum)) {
 	return true;
     } else {
 	alert('Phone Numbers should match the format, nnn-nnn-nnnn');
-	document.getElementById('Phone').value = '';
+	document.getElementById('FIPhone').text('');
 	return false;
     }
 }
@@ -299,6 +299,4 @@ function processTextMessage(e) {
 	    return "ok";
 	}
     });
-
-    console.log("js: " + js);
 }
