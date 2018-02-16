@@ -24,8 +24,8 @@ Flyin' In is written in Javascript, JQuery/AJAX, Bootstrap and uses API's from T
 * cors (v2.8.4)
 * body-parser (v1.18.2)
 * request
-
 * NPM
+* pm2 (NPM process manager)
 * JQuery (v3.2.1)
 * Ajax (v1.12.9)
 * HTML5 / CSS
@@ -46,6 +46,7 @@ npm install express
 npm install body-parser
 npm install cors
 npm install request
+npm install pm2
 ```
 
 ## Usage
