@@ -3,7 +3,7 @@
 <p align="center"><img src="images/LogoFlyinIn.png" width="150px" /></p>
 
 ## Welcome
-<p align="center"><img src="images/FlyinIn.png" width="150px" /></p>
+<p align="center"><img src="images/FlyinIn.png" width="300px" /></p>
 
 Flyin' In is written in Javascript, JQuery/AJAX, Bootstrap and uses API's from Twilio, Aviation Edge, and Google Maps.
 
