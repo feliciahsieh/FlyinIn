@@ -90,12 +90,20 @@ function processInput(e) {
     $("#FIOriginAirportIcao").val($("#FIOriginAirportIcao").val().toUpperCase());
     console.log('User: origin aiport: ' + $("#FIOriginAirportIcao").val());
 
-    //Get Airline input field
-    switch (arln.val()) {
-    case 'JBU':
-	airlineIcao = arln.val();
-	airlineIata = 'B6';
+   //Get Airline input field
+   switch (arln.val()) {
+    case 'DAL':
+	    airlineIcao = arln.val();
+	    airlineIata = 'DL';
+    	break;
+    case 'DL':
+	airlineIata = arln.val();
+	airlineIcao = 'DAL';
 	break;
+    case 'JBU':
+	    airlineIcao = arln.val();
+	    airlineIata = 'B6';
+    	break;
     case 'B6':
 	airlineIata = arln.val();
 	airlineIcao = 'JBU';
@@ -119,6 +127,15 @@ function processInput(e) {
     case 'AAL':
 	airlineIcao = arln.val();
 	airlineIata = 'AA';
+	break;
+    case 'UA':
+	airlineIata = arln.val();
+	airlineIcao = 'UAL';
+	break;
+    case 'UAL':
+	airlineIcao = arln.val();
+	airlineIata = 'UA';
+	break;
     case 'AA':
 	airlineIata = arln.val();
 	airlineIcao = 'AAL';
@@ -127,6 +144,7 @@ function processInput(e) {
 	airlineIcao = arln.val();
 	airlineIata = 'OO';
     case 'OO':
+	break;
 	airlineIata = arln.val();
 	airlineIcao = 'SKW';
 	break;
@@ -139,7 +157,7 @@ function processInput(e) {
     console.log("airlineIata: " + airlineIata + " flight: " + flight);
 
     //Query Aviation Edge for basic Airport / Airline static info
-    let urlFlights = 'https://aviation-edge.com/api/public/flights?&key=ce8aa4-7c63af-d48024-815717-bfad64' + '&flight[iataNumber]=' + airlineIata + flight;
+    let urlFlights = '//flyinin.korejs.org/api/aviation/flights?iataNumber=' + airlineIata + flight;
     //alert(urlFlights);
     $.get(urlFlights, function (dataFlights) {
 	//console.log('DATAFLIGHTS: ' + dataFlights[0].departure);
@@ -161,7 +179,7 @@ function processInput(e) {
     .done(function(dataB) {
 	//alert('2nd NESTED LOOP: Query Aviation Edge Routes');
         //Query Aviation Edge Routes - NOT RELIABLE
-	let urlRoutes = 'http://aviation-edge.com/api/public/routes?key=ce8aa4-7c63af-d48024-815717-bfad64' + '&departureIata=' + departureIata + '&departureIcao=' + departureIcao + '&airlineIata=' + airlineIata + '&airlineIcao=' + airlineIcao + '&flightNumber=' + flight;
+	let urlRoutes = '//flyinin.korejs.org/api/aviation/routes'  + '?departureIata=' + departureIata + '&departureIcao=' + departureIcao + '&airlineIata=' + airlineIata + '&airlineIcao=' + airlineIcao + '&flightNumber=' + flight;
         //alert(urlRoutes);
 	//https://aviation-edge.com/api/public/routes?key=ce8aa4-7c63af-d48024-815717-bfad64&departureIata=SEA&departureIcao=KSEA&airlineIata=AS&airlineIcao=ASA&flightNumber=360
 	console.log(urlRoutes);
@@ -177,7 +195,7 @@ function processInput(e) {
 	    //console.log("landingT: " + landingT);
 	    landingT.setHours(+ar[0], +ar[1], 0);
 	    //console.log('landingT: ' + landingT);
-	    
+
 	    arrivalTime = landingT;
 	    console.log("ARRIVALTIME: " + arrivalTime);
 
@@ -188,7 +206,11 @@ function processInput(e) {
 		console.log('3rd Nested PROMISE', data2);
 		console.log('airline: '+ airlineIcao + '  flightNum: ' + flight + '  zipcode: ' + zipCode);
 		console.log('arrivalIcao: ' + arrivalIcao);
-		let urlDriving = 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='+ zipCode + '&destinations=' + arrivalIata + '&key=AIzaSyApQx97pXZTl1IOF1t-F7OnQTndQzU-QUs';
+
+    let urlDriving = 'http://flyinin.korejs.org/api/gdrive'
+      + '?zipCode=' + zipCode
+      + '&destinations=' + arrivalIata;
+
 		console.log('DRIVING:\n' + urlDriving);
 		console.log("URLDRIVING: " + urlDriving);
 		$.get(urlDriving)
@@ -206,13 +228,13 @@ function processInput(e) {
 
 			//******CALCULATE DRIVE TIME*******/
 			//Date.prototype.addHours = function(h) {
-			//this.setTime(this.getTime() + (h*60*60*1000)); 
-			//return this;   
+			//this.setTime(this.getTime() + (h*60*60*1000));
+			//return this;
 			//}
 
 			var walkToCurb = 15 * 60;
 			console.log("walkToCurb (sec): " + walkToCurb + " = " + (walkToCurb / 60) + " min" );
-		    
+
 			var time = new Date(arrivalTime); //Already in local time
 			console.log('typeof(time): ' + typeof(arrivalTime));
 			console.log('ORIG ARRIVAL: ' + arrivalTime);
@@ -243,7 +265,7 @@ function processInput(e) {
 			resultText = 'Your best time to leave is <B><I><U>' + finalTime + '</U></I></B>.';
 			resultText = resultText + '<BR>Your Estimated drive time is ' + driverTimeText + '.';
 			resultText = resultText + '<BR>Their flight ' + airlineIcao + flight + ' from ' + departureIcao + ' to ' + arrivalIcao;
-			let tempHH = arrivalTime.getHours();			
+			let tempHH = arrivalTime.getHours();
 			let tempMM = arrivalTime.getMinutes();
 			if (tempHH > 11) { //0-23
 			    tempAMPM = 'PM';
@@ -262,13 +284,13 @@ function processInput(e) {
 			$('#result').html(resultText);
 
 			//DRAW MAP
-			
+
 			  $("#drivingMap").html(`
 			  <iframe id="drivingMap" width="100%" height="100%" style="border:0" allowfullscreen></iframe>
 			  <script>
 			  document.getElementById("drivingMap").src = "https://www.google.com/maps/embed/v1/directions?origin=" + zipCode + "&destination=" + arrivalIcao + ' airport' + "&key=AIzaSyABso7fs_w6S9pxMMK1T5vKZERvnA5Nzy0";
 			  </script>`);
-			
+
 		    }, 'json')
 
 		});
@@ -277,12 +299,11 @@ function processInput(e) {
 };
 
 function processTextMessage(e) {
-    //e.preventDefault();
-    //e.stopImmediatePropagation()
+    e.preventDefault();
 
     let userPhone = $('#FIPhone').val();
     let msg = $('#result').text();
-    let urlTwilio = 'http://192.168.33.10:8888/api/twilio';
+    let urlTwilio = '//flyinin.korejs.org/api/twilio';
 
     let data = {
     	"message" : msg,
