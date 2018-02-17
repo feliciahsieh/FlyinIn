@@ -312,7 +312,7 @@ function processTextMessage(e) {
     };
 
     $.ajax({
-	type: 'POST',
+	type: 'GET',
 	url: urlTwilio,
 	data: data,
 	contentType: 'application/json',

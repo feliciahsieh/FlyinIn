@@ -81,19 +81,19 @@ app.get('/api/aviation/flights', (req, res) => {
   })
 });
 
-app.post('/api/twilio', function(req, res){
-  // console.log(req.body.phoneNum);
+app.get('/api/twilio', function(req, res){
+  console.log(req.query);
 
   twilio.messages.create({
-	to: req.body.phoneNum,
-	from: req.body.FIphone,
-	body: req.body.message
+	to: req.query.phoneNum,
+	from: req.query.FIphone,
+	body: req.query.message
     }).then((message) => console.log(message.sid), function (err) {
 	console.log(err); // Error message
     });
 
     res.send(req.body);
-  });
+});
 
 app.listen(process.env.TWILIO_PORT || 3005, function(){
     console.log("App running on port " + process.env.TWILIO_PORT || 3005);
