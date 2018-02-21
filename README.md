@@ -50,9 +50,9 @@ npm install pm2
 ```
 
 ## Usage
-Use a browser and open index.html. Enter the Airline, Flight Number, and your Phone Number to receive a text message. You will receive information on when you should leave for the airport, depending on your starting location.
+This app is live. With your browser, go to http://flyinin.korejs.org. Enter the Airline, Flight Number, Starting Airport, and your Phone Number to receive a text message. You will receive information on when you should leave for the airport, depending on your starting location.
 
-Note, text messages will only be sent to phone numbers in your chosen country. To upgrade to international phone numbers, you may need to upgrade your Twilio account.
+Note, text messaging on the Live app will not work for you. My free account only lets me receive texts. For your app, keep you mind that Text messages will only be sent to phone numbers in your chosen country. To upgrade to international phone numbers, you may need to upgrade your Twilio account.
 
 ## Credits
 Flyin' In is owned and maintained by Felicia Hsieh ([@feliciahsiehsw](https://twitter.com/feliciahsiehsw)) and Sergii Garkusha ([@Cu7ious](https://twitter.com/Cu7ious)).
