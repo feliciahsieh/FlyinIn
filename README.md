@@ -26,6 +26,7 @@ Flyin' In is written in Javascript, JQuery/AJAX, Bootstrap and uses API's from T
 * request
 * NPM
 * pm2 (NPM process manager)
+* dotenv (gets environment vars)
 * JQuery (v3.2.1)
 * Ajax (v1.12.9)
 * HTML5 / CSS
@@ -47,6 +48,7 @@ npm install body-parser
 npm install cors
 npm install request
 npm install pm2
+npm install dotenv --save
 ```
 
 ## Usage
