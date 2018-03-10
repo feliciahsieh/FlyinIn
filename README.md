@@ -16,7 +16,7 @@ Flyin' In is written in Javascript, JQuery/AJAX, Bootstrap and uses API's from T
 
 ## Requirements
 * Ubuntu (v14.04 LTS)
-* NodeJS (v6.12.3)
+* NodeJS (v6.13.1)
 * Twilio API (with valid Twilio account and token) (v3.11.3)
 * Aviation Edge API (with valid API account and key for Premium level)
 * Google Maps API (with valid Google API account and token)
@@ -26,7 +26,7 @@ Flyin' In is written in Javascript, JQuery/AJAX, Bootstrap and uses API's from T
 * request
 * NPM
 * pm2 (NPM process manager)
-* dotenv (gets environment vars)
+* dotenv (gets environment vars) (v5.0)
 * JQuery (v3.2.1)
 * Ajax (v1.12.9)
 * HTML5 / CSS
