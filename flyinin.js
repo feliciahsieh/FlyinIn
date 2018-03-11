@@ -157,7 +157,7 @@ function processInput(e) {
     console.log("airlineIata: " + airlineIata + " flight: " + flight);
 
     //Query Aviation Edge for basic Airport / Airline static info
-    let urlFlights = '//flyinin.korejs.org/api/aviation/flights?iataNumber=' + airlineIata + flight;
+    let urlFlights = '//flyinin.today/api/aviation/flights?iataNumber=' + airlineIata + flight;
     //alert(urlFlights);
     $.get(urlFlights, function (dataFlights) {
 	//console.log('DATAFLIGHTS: ' + dataFlights[0].departure);
@@ -179,7 +179,7 @@ function processInput(e) {
     .done(function(dataB) {
 	//alert('2nd NESTED LOOP: Query Aviation Edge Routes');
         //Query Aviation Edge Routes - NOT RELIABLE
-	let urlRoutes = '//flyinin.korejs.org/api/aviation/routes'  + '?departureIata=' + departureIata + '&departureIcao=' + departureIcao + '&airlineIata=' + airlineIata + '&airlineIcao=' + airlineIcao + '&flightNumber=' + flight;
+	let urlRoutes = '//flyinin.today/api/aviation/routes'  + '?departureIata=' + departureIata + '&departureIcao=' + departureIcao + '&airlineIata=' + airlineIata + '&airlineIcao=' + airlineIcao + '&flightNumber=' + flight;
         //alert(urlRoutes);
 	//https://aviation-edge.com/api/public/routes?key=ce8aa4-7c63af-d48024-815717-bfad64&departureIata=SEA&departureIcao=KSEA&airlineIata=AS&airlineIcao=ASA&flightNumber=360
 	console.log(urlRoutes);
@@ -207,7 +207,7 @@ function processInput(e) {
 		console.log('airline: '+ airlineIcao + '  flightNum: ' + flight + '  zipcode: ' + zipCode);
 		console.log('arrivalIcao: ' + arrivalIcao);
 
-    let urlDriving = 'http://flyinin.korejs.org/api/gdrive'
+    let urlDriving = 'http://flyinin.today/api/gdrive'
       + '?zipCode=' + zipCode
       + '&destinations=' + arrivalIata;
 
@@ -303,7 +303,7 @@ function processTextMessage(e) {
 
     let userPhone = $('#FIPhone').val();
     let msg = $('#result').text();
-    let urlTwilio = '//flyinin.korejs.org/api/twilio';
+    let urlTwilio = '//flyinin.today/api/twilio';
 
     let data = {
     	"message" : msg,
