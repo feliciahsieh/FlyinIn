@@ -19,139 +19,155 @@ var zipCode = '';
 var resultText;
 
 function checkFlightNum (inputTxt) {
-    var flightNum = /^[0-9]{1,4}$/;
-    if (inputTxt.value.match(flightNum)) {
-	return true;
-    } else {
-	alert('Flight Numbers should match the format, nnnn');
-	document.getElementById('Flight').value = 0;
-	return false;
-    }
+  var flightNum = /^[0-9]{1,4}$/;
+  if (inputTxt.value.match(flightNum)) {
+    return true;
+  } else {
+    alert('Flight Numbers should match the format, nnnn');
+    document.getElementById('Flight').value = 0;
+    return false;
+  }
 }
 
 function checkOriginAirportIcao (inputTxt) {
-    //stub function for check
+  //stub function for check
 }
 
 function checkZipCode (inputTxt) {
-    let regExzipCode = /^[0-9]{5}$/;
-    if (inputTxt.value.match(regExzipCode)) {
-	return true;
-    } else {
-	alert('Zip Code should match the value nnnnn');
-	document.getElementById('FIZipCode').value = 0;
-	return false;
-    }
+  let regExzipCode = /^[0-9]{5}$/;
+  if (inputTxt.value.match(regExzipCode)) {
+    return true;
+  } else {
+    alert('Zip Code should match the value nnnnn');
+    document.getElementById('FIZipCode').value = 0;
+    return false;
+  }
 }
 
 function checkPhoneNum (inputTxt) {
-    var regExphoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-    if (inputTxt.value.match(regExphoneNum)) {
-	return true;
-    } else {
-	alert('Phone Numbers should match the format, nnn-nnn-nnnn');
-	document.getElementById('FIPhone').text('');
-	return false;
-    }
+  var regExphoneNum = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  if (inputTxt.value.match(regExphoneNum)) {
+    return true;
+  } else {
+    alert('Phone Numbers should match the format, nnn-nnn-nnnn');
+    document.getElementById('FIPhone').text('');
+    return false;
+  }
 }
 //}) //end of $(document).ready(...)
 
 
 function processInput(e) {
-    e.preventDefault();
-    //e.stopImmediatePropagation()
+  e.preventDefault();
+  //e.stopImmediatePropagation()
 
-    //INITIALIZE VALUES
-    //Get USER's input
-    flight = $("#FIFlightNum").val();
-    console.log("User: flight#: " + $("#FIFlightNum").val());
-    zipCode = $('#FIZipCode').val();
-    console.log("User: zipcode: " + $("#FIZipCode").val());
+  //INITIALIZE VALUES
+  //Get USER's input
+  flight = $("#FIFlightNum").val();
+  console.log("User: flight#: " + $("#FIFlightNum").val());
+  zipCode = $('#FIZipCode').val();
+  console.log("User: zipcode: " + $("#FIZipCode").val());
 
-    //FIND TODAY'S SINGLE FLIGHT
-    let dte = new Date();
-    var mm, dd;
-    //console.log(dte);
-    options = {"timeZone" : "America/Los_Angeles"};
-    let localDate = dte.toLocaleDateString('en-EN', options);
-    //console.log('localDate: ' + localDate);
-    let local=localDate.split('/');
-    if(local[0].length === 1)
-	local[0] = '0' + local[0];
-    if(local[1].length === 1)
-	local[1] = '0' + local[1];
-    flightDate = local[0] + '/' + local[1] + '/' + local[2];
-    console.log("Calculating today as: " + flightDate);
+  //FIND TODAY'S SINGLE FLIGHT
+  let dte = new Date();
+  var mm, dd;
+  //console.log(dte);
+  options = {"timeZone" : "America/Los_Angeles"};
+  let localDate = dte.toLocaleDateString('en-EN', options);
+  //console.log('localDate: ' + localDate);
+  let local=localDate.split('/');
+  if(local[0].length === 1)
+    local[0] = '0' + local[0];
+  if(local[1].length === 1)
+    local[1] = '0' + local[1];
+  flightDate = local[0] + '/' + local[1] + '/' + local[2];
+  console.log("Calculating today as: " + flightDate);
 
-    var arln = $("#FIAirline");
-    arln.val(arln.val().toUpperCase());
-    console.log('User: airline: ' + arln.val());
+  var arln = $("#FIAirline");
+  arln.val(arln.val().toUpperCase());
+  console.log('User: airline: ' + arln.val());
 
-    $("#FIOriginAirportIcao").val($("#FIOriginAirportIcao").val().toUpperCase());
-    console.log('User: origin aiport: ' + $("#FIOriginAirportIcao").val());
+  $("#FIOriginAirportIcao").val($("#FIOriginAirportIcao").val().toUpperCase());
+  console.log('User: origin aiport: ' + $("#FIOriginAirportIcao").val());
 
-   //Get Airline input field
-   switch (arln.val()) {
-    case 'DAL':
-	    airlineIcao = arln.val();
-	    airlineIata = 'DL';
-    	break;
-    case 'DL':
-	airlineIata = arln.val();
-	airlineIcao = 'DAL';
-	break;
-    case 'JBU':
-	    airlineIcao = arln.val();
-	    airlineIata = 'B6';
-    	break;
-    case 'B6':
-	airlineIata = arln.val();
-	airlineIcao = 'JBU';
-	break;
-    case 'SWA':
-	airlineIcao = arln.val();
-	airlineIata = 'WN';
-	break;
-    case 'WN':
-	airlineIata = arln.val();
-	airlineIcao = 'SWA';
-	break;
-    case 'ASA':
-	airlineIcao = arln.val();
-	airlineIata = 'AS';
-	break;
-    case 'AS':
-	airlineIata = arln.val();
-	airlineIcao = 'ASA';
-	break;
-    case 'AAL':
-	airlineIcao = arln.val();
-	airlineIata = 'AA';
-	break;
-    case 'UA':
-	airlineIata = arln.val();
-	airlineIcao = 'UAL';
-	break;
-    case 'UAL':
-	airlineIcao = arln.val();
-	airlineIata = 'UA';
-	break;
-    case 'AA':
-	airlineIata = arln.val();
-	airlineIcao = 'AAL';
-	break;
-    case 'SKW':
-	airlineIcao = arln.val();
-	airlineIata = 'OO';
-    case 'OO':
-	break;
-	airlineIata = arln.val();
-	airlineIcao = 'SKW';
-	break;
-    default:
-	airlineIata = 'FI ERROR';
-	airlineIcao = 'FI ERROR';
-    }
+  //Get Airline input field
+  switch (arln.val()) {
+  case 'DAL':
+    airlineIcao = arln.val();
+    airlineIata = 'DL';
+    break;
+  case 'DL':
+    airlineIata = arln.val();
+    airlineIcao = 'DAL';
+    break;
+  case 'JBU':
+    airlineIcao = arln.val();
+    airlineIata = 'B6';
+    break;
+  case 'B6':
+    airlineIata = arln.val();
+    airlineIcao = 'JBU';
+    break;
+  case 'SWA':
+    airlineIcao = arln.val();
+    airlineIata = 'WN';
+    break;
+  case 'WN':
+    airlineIata = arln.val();
+    airlineIcao = 'SWA';
+    break;
+  case 'ASA':
+    airlineIcao = arln.val();
+    airlineIata = 'AS';
+    break;
+  case 'AS':
+    airlineIata = arln.val();
+    airlineIcao = 'ASA';
+    break;
+  case 'AAL':
+    airlineIcao = arln.val();
+    airlineIata = 'AA';
+    break;
+  case 'AA':
+    airlineIata = arln.val();
+    airlineIcao = 'AAL';
+    break;
+  case 'UAL':
+    airlineIcao = arln.val();
+    airlineIata = 'UA';
+    break;
+  case 'UA':
+    airlineIata = arln.val();
+    airlineIcao = 'UAL';
+    break;
+  case 'HAL':
+    airlineIcao = arln.val();
+    airlineIata = 'HA';
+    break;
+  case 'HA':
+    airlineIata = arln.val();
+    airlineIcao = 'HAL';
+    break;
+  case 'ASQ':
+    airlineIcao = arln.val();
+    airlineIata = 'EV';
+    break;
+  case 'EV':
+    airlineIata = arln.val();
+    airlineIcao = 'ASQ';
+    break;
+  case 'SKW':
+    airlineIcao = arln.val();
+    airlineIata = 'OO';
+    break;
+  case 'OO':
+    airlineIata = arln.val();
+    airlineIcao = 'SKW';
+    break;
+  default:
+    airlineIata = 'FI ERROR';
+    airlineIcao = 'FI ERROR';
+  }
 
     //Lookup Flight Info from AviationEdge
     console.log("airlineIata: " + airlineIata + " flight: " + flight);
